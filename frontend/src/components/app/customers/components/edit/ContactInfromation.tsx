@@ -13,7 +13,7 @@ export default function ContactInformation({
   return (
     <div className="space-y-4 md:col-span-2">
       <h3 className="text-lg font-medium">Contact Information</h3>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <FormInput
           id="name"
           name="name"
