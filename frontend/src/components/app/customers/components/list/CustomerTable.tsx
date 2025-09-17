@@ -24,6 +24,8 @@ import {
 } from "@/components/tables/PaginationControls";
 import { TableSkeleton } from "@/components/tables/TableSkeleton";
 import CustomerFilters from "./CustomerFilters";
+import BalanceBadge from "@/components/common/badges/BalanceBadge";
+import MaterialBalanceBadge from "@/components/common/badges/MaterialBalanceBadge";
 
 interface TableProps {
   value: Customer[];
@@ -63,8 +65,7 @@ export const CustomerTable = ({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{title}</CardTitle>
-        <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-end gap-4">
-          <CustomerFilters />
+        <div className="grid grid-cols-1 gap-4">
           {paginationProps && (
             <Select
               value={paginationProps.rows.toString()}
@@ -97,7 +98,7 @@ export const CustomerTable = ({
               <TableHead>Email</TableHead>
               <TableHead>Phone</TableHead>
               <TableHead>Balance</TableHead>
-              <TableHead>Material Balance</TableHead>
+              <TableHead>Material</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -115,8 +116,12 @@ export const CustomerTable = ({
                 <TableCell>
                   <PhoneLink customer={customer} />
                 </TableCell>
-                <TableCell>1000 ft</TableCell>
-                <TableCell>1500 g</TableCell>
+                <TableCell>
+                  <BalanceBadge balance={1000} />
+                </TableCell>
+                <TableCell>
+                  <MaterialBalanceBadge balance={-10.325} />
+                </TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
                     <ViewActionButton item={customer} onClick={onView} />
