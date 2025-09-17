@@ -11,8 +11,8 @@ export default function SideBarBrand() {
         alt={import.meta.env.VITE_BRAND}
         title={import.meta.env.VITE_BRAND}
       />
-      <span className="flex sm:hidden lg:flex lg:ml-4 self-center text-2xl md:text-3xl font-semibold whitespace-nowrap text-p300">
-        CRM Portal
+      <span className="flex sm:hidden lg:flex lg:ml-1 self-center text-2xl md:text-3xl font-semibold whitespace-nowrap text-p300">
+        {import.meta.env.VITE_BRAND}
       </span>
     </a>
   );

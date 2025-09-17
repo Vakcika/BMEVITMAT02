@@ -37,7 +37,10 @@ export default function Login() {
     <>
       <title>{import.meta.env.VITE_BRAND + " | Login"}</title>
       <link rel="canonical" href={import.meta.env.VITE_URL + "/login"}></link>
-      <meta name="description" content="Webby CRM Portal login page" />
+      <meta
+        name="description"
+        content={import.meta.env.VITE_BRAND + " login page"}
+      />
       <div className="flex flex-col md:flex-row items-center justify-auto">
         <LazyImage
           src="/images/background_login.webp"

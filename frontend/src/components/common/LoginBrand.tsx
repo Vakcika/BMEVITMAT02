@@ -12,7 +12,7 @@ export default function LoginBrand() {
         title={import.meta.env.VITE_BRAND}
       />
       <span className="flex self-center text-5xl font-semibold whitespace-nowrap text-p300">
-        CRM Portal
+        {import.meta.env.VITE_BRAND}
       </span>
     </a>
   );
