@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Menu, Gauge, Users, ArrowLeftRight, CalendarSync } from "lucide-react";
+import {
+  Menu,
+  Users,
+  ShoppingBag,
+  Anvil,
+  Logs,
+  ReceiptText,
+  Settings,
+} from "lucide-react";
 import SideBarBottom from "./SideBarBottom";
 import SideBarBrand from "./SideBarBrand";
 import SideBarItem from "./SideBarItem";
@@ -28,36 +36,52 @@ export default function SideBar() {
           <SideBarBrand />
           <div className="gradient-border"></div>
           <SideBarItem
-            href={"/app/dashboard"}
+            href={"/app/orders"}
             sideBarIcon={
-              <Gauge className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+              <ShoppingBag className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             }
-            sideBarName="Dashboard"
-            active={location.pathname === "/app/dashboard"}
+            sideBarName="Orders"
+            active={location.pathname === "/app/orders"}
           />
           <SideBarItem
-            href={"/app/customers"}
+            href={"/app/casts"}
+            sideBarIcon={
+              <Anvil className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+            }
+            sideBarName="Casts"
+            active={location.pathname === "/app/casts"}
+          />
+          <SideBarItem
+            href={"/app/partners"}
             sideBarIcon={
               <Users className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             }
-            sideBarName="Customers"
-            active={location.pathname === "/app/customers"}
+            sideBarName="Partners"
+            active={location.pathname === "/app/partners"}
           />
           <SideBarItem
-            href={"/app/transactions"}
+            href={"/app/inventory"}
             sideBarIcon={
-              <ArrowLeftRight className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+              <Logs className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             }
-            sideBarName="Transactions"
-            active={location.pathname === "/app/transactions"}
+            sideBarName="Inventory"
+            active={location.pathname === "/app/inventory"}
           />
           <SideBarItem
-            href={"/app/subscriptions"}
+            href={"/app/statements"}
             sideBarIcon={
-              <CalendarSync className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+              <ReceiptText className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             }
-            sideBarName="Subscriptions"
-            active={location.pathname === "/app/subscriptions"}
+            sideBarName="Statements"
+            active={location.pathname === "/app/statements"}
+          />
+          <SideBarItem
+            href={"/app/settings"}
+            sideBarIcon={
+              <Settings className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+            }
+            sideBarName="Settings"
+            active={location.pathname === "/app/settings"}
           />
         </div>
         <SideBarBottom />
