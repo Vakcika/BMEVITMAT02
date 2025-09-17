@@ -13,7 +13,6 @@ import Address from "./components/edit/Address";
 import CompanyInformation from "./components/edit/CompanyInformation";
 import ContactInformation from "./components/edit/ContactInfromation";
 import { useCustomerMutations } from "./hooks/useCustomerDataMutation";
-import useFormOptions from "../hooks/useFormOptions.ts";
 
 interface EditCustomerProps {
   isNew?: boolean;
@@ -27,7 +26,6 @@ export default function EditCustomer({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { customerData, isLoading } = useCustomerData(isNew);
   const { createCustomer, updateCustomer } = useCustomerMutations();
-  const { users, statuses } = useFormOptions();
 
   const handleSubmit = async (values: Customer) => {
     setIsSubmitting(true);
@@ -99,11 +97,7 @@ export default function EditCustomer({
             {(formik) => (
               <Form className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <CompanyInformation
-                    formik={formik}
-                    users={users}
-                    statuses={statuses}
-                  />
+                  <CompanyInformation formik={formik} />
 
                   <ContactInformation formik={formik} />
 

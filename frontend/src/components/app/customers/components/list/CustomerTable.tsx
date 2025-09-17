@@ -23,7 +23,6 @@ import {
   PaginationControls,
 } from "@/components/tables/PaginationControls";
 import { TableSkeleton } from "@/components/tables/TableSkeleton";
-import CustomerFilters from "./CustomerFilters";
 import BalanceBadge from "@/components/common/badges/BalanceBadge";
 import MaterialBalanceBadge from "@/components/common/badges/MaterialBalanceBadge";
 

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Edit } from "lucide-react";
 import { DeleteActionButton } from "@/components/tables/actions/DeleteActionButton";
+import BalanceBadge from "@/components/common/badges/BalanceBadge";
+import MaterialBalanceBadge from "@/components/common/badges/MaterialBalanceBadge";
 
 export default function ViewCustomerHeader({
   customer,
@@ -15,7 +17,10 @@ export default function ViewCustomerHeader({
     <div className="mt-6 mb-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
       <div>
         <h1 className="text-2xl font-semibold">{customer.company_name}</h1>
-        <p className="text-n100">{customer.name}</p>
+        <p className="text-n100">
+          {customer.name} • <BalanceBadge balance={1000} /> •{" "}
+          <MaterialBalanceBadge balance={-15} />
+        </p>
       </div>
       <div className="flex flex-wrap gap-2">
         <Button onClick={onEdit}>
