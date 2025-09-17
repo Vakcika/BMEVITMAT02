@@ -12,14 +12,7 @@ import useIsAuthenticated from "./auth/useIsAuthenticated";
 import ListCustomers from "./components/app/customers/ListCustomers";
 import ViewCustomer from "./components/app/customers/ViewCustomer";
 import EditCustomer from "./components/app/customers/EditCustomer";
-import ListTransactions from "./components/app/transactions/ListTransactions";
-import EditTransaction from "./components/app/transactions/EditTransaction";
-import ViewTransaction from "./components/app/transactions/ViewTransaction";
 import Dashboard from "./components/app/dashboard/Dashboard";
-import { LogDialogProvider } from "./components/app/logs/LogDialogProvider";
-import EditSubscription from "./components/app/subscriptions/EditSubscription";
-import ViewSubscription from "./components/app/subscriptions/ViewSubscription";
-import ListSubscriptions from "./components/app/subscriptions/ListSubscriptions";
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -49,54 +42,26 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <AuthProvider config={authConfig}>
-          <LogDialogProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/app" element={<AppLayout />}>
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="customers" element={<ListCustomers />} />
-                  <Route
-                    path="/app/customer/new"
-                    element={<EditCustomer isNew={true} />}
-                  />
-                  <Route path="/app/customer/:id" element={<ViewCustomer />} />
-                  <Route
-                    path="/app/customer/:id/edit"
-                    element={<EditCustomer />}
-                  />
-                  <Route path="transactions" element={<ListTransactions />} />
-                  <Route
-                    path="/app/transaction/new"
-                    element={<EditTransaction isNew={true} />}
-                  />
-                  <Route
-                    path="/app/transaction/:id"
-                    element={<ViewTransaction />}
-                  />
-                  <Route
-                    path="/app/transaction/:id/edit"
-                    element={<EditTransaction />}
-                  />
-                  <Route path="subscriptions" element={<ListSubscriptions />} />
-                  <Route
-                    path="/app/subscription/new"
-                    element={<EditSubscription isNew={true} />}
-                  />
-                  <Route
-                    path="/app/subscription/:id"
-                    element={<ViewSubscription />}
-                  />
-                  <Route
-                    path="/app/subscription/:id/edit"
-                    element={<EditSubscription />}
-                  />
-                </Route>
-                <Route path="*" element={<Page404 />} />
-              </Routes>
-            </BrowserRouter>
-          </LogDialogProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/app" element={<AppLayout />}>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="customers" element={<ListCustomers />} />
+                <Route
+                  path="/app/customer/new"
+                  element={<EditCustomer isNew={true} />}
+                />
+                <Route path="/app/customer/:id" element={<ViewCustomer />} />
+                <Route
+                  path="/app/customer/:id/edit"
+                  element={<EditCustomer />}
+                />
+              </Route>
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          </BrowserRouter>
         </AuthProvider>
       </QueryClientProvider>
       <Toaster

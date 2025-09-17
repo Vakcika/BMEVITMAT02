@@ -8,9 +8,6 @@ import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
 import ViewCustomerHeader from "./components/view/ViewCustomerHeader";
 import CustomerDetailsCard from "./components/view/CustomerDatilsCard";
 import CustomerExtraInfoCard from "./components/view/CustomerExtraInfoCard";
-import TransactionListWrapper from "../transactions/components/list/TransactionListWrapper";
-import LogListWrapper from "../logs/list/LogListWrapper";
-import SubscriptionListWrapper from "../subscriptions/components/list/SubscriptionListWrapper";
 
 export default function ViewCustomer() {
   const { id } = useParams();
@@ -69,21 +66,13 @@ export default function ViewCustomer() {
         <CustomerDetailsCard customer={customer} />
         <CustomerExtraInfoCard customer={customer} />
       </div>
-      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4">
-        <LogListWrapper customer={customer} />
-        <SubscriptionListWrapper
-          queryParams={"&customer=" + customer.id}
-          createQueryParams={"&customer=" + customer.id}
-        />
-      </div>
-
-      <TransactionListWrapper
+      {/* <TransactionListWrapper
         defaultRows={5}
         queryParams={"&customer=" + customer.id}
         createQueryParams={
           "&customer=" + customer.id + "&currency=HUF" + "&transactionTypeId=1"
         }
-      />
+      /> */}
     </div>
   );
 }

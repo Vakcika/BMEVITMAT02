@@ -52,12 +52,12 @@ export default function SideBar() {
             active={location.pathname === "/app/casts"}
           />
           <SideBarItem
-            href={"/app/partners"}
+            href={"/app/customers"}
             sideBarIcon={
               <Users className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             }
-            sideBarName="Partners"
-            active={location.pathname === "/app/partners"}
+            sideBarName="Customers"
+            active={location.pathname === "/app/customers"}
           />
           <SideBarItem
             href={"/app/inventory"}
