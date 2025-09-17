@@ -1,6 +1,5 @@
 import {
   Building,
-  UserCheck,
   User,
   Mail,
   Phone,
@@ -13,7 +12,6 @@ import DetailWithIcon from "@/components/common/details/DetailWithIcon";
 import EmailLink from "@/components/common/links/EmailLink";
 import PhoneLink from "@/components/common/links/PhoneLink";
 import WebsiteLink from "@/components/common/links/WebsiteLink";
-import UserAvatar from "@/components/common/UserAvatar";
 
 export default function CustomerDetailsCard({
   customer,
@@ -31,11 +29,6 @@ export default function CustomerDetailsCard({
             icon={<Building className="w-6 h-6 text-n100" />}
             label="Company"
             value={customer.company_name}
-          />
-          <DetailWithIcon
-            icon={<UserCheck className="w-6 h-6 text-n100" />}
-            label="Assigned to"
-            value={<UserAvatar user={customer.user?.name} />}
           />
           <DetailWithIcon
             icon={<User className="w-6 h-6 text-n100" />}

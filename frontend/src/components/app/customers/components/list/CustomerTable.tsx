@@ -14,10 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import CustomerStatusBadge from "@/components/common/badges/CustomerStatusBadge";
 import EmailLink from "@/components/common/links/EmailLink";
 import PhoneLink from "@/components/common/links/PhoneLink";
-import UserAvatar from "@/components/common/UserAvatar";
 import { DeleteActionButton } from "@/components/tables/actions/DeleteActionButton";
 import { ViewActionButton } from "@/components/tables/actions/ViewActionButton";
 import {
@@ -98,8 +96,8 @@ export const CustomerTable = ({
               <TableHead>Contact Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Phone</TableHead>
-              <TableHead>Asignee</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>Balance</TableHead>
+              <TableHead>Material Balance</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -117,12 +115,8 @@ export const CustomerTable = ({
                 <TableCell>
                   <PhoneLink customer={customer} />
                 </TableCell>
-                <TableCell>
-                  <UserAvatar user={customer.user?.name} />
-                </TableCell>
-                <TableCell>
-                  <CustomerStatusBadge status={customer.status} />
-                </TableCell>
+                <TableCell>1000 ft</TableCell>
+                <TableCell>1500 g</TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
                     <ViewActionButton item={customer} onClick={onView} />
