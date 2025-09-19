@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TransactionRequest extends FormRequest
+class MaterialHistoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,12 +15,13 @@ class TransactionRequest extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id',
-            'order_id' => 'required|exists:orders,id',
+            'material_id' => 'required|exists:materials,id',
+            'order_id' => 'nullable|exists:orders,id',
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'amount' => 'required|numeric|min:0',
             'date' => 'required|date',
-            'note' => 'nullable|string',
+            'notes' => 'nullable|string',
         ];
     }
 }
