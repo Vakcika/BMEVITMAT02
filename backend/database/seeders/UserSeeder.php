@@ -4,22 +4,32 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        $roles = Role::pluck('id')->toArray();
+
         DB::table('users')->insert([
-            'name' => 'demo',
-            'email' => 'bsarkozi2002@gmail.com',
-            'password' => Hash::make('password'),
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            [
+                'role_id' => $roles[0],
+                'name' => 'admin',
+                'email' => 'bsarkozi2002@gmail.com',
+                'password' => Hash::make('password'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'role_id' => $roles[1],
+                'name' => 'Manager User',
+                'email' => 'manager@example.com',
+                'password' => Hash::make('password'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

@@ -6,28 +6,30 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Customer;
+use App\Models\Material;
 use App\Models\Order;
 use Faker\Factory as Faker;
-use Carbon\Carbon;
 
-class TransactionSeeder extends Seeder
+class MaterialHistorySeeder extends Seeder
 {
     public function run(): void
     {
         $faker = Faker::create();
         $customers = Customer::pluck('id')->toArray();
+        $materials = Material::pluck('id')->toArray();
         $orders = Order::pluck('id')->toArray();
 
-        foreach (range(1, 50) as $i) {
-            DB::table('transactions')->insert([
+        foreach (range(1, 20) as $i) {
+            DB::table('material_history')->insert([
                 'id' => (string) Str::uuid(),
                 'customer_id' => $faker->randomElement($customers),
+                'material_id' => $faker->randomElement($materials),
                 'order_id' => $faker->randomElement($orders),
                 'name' => $faker->word,
-                'type' => $faker->randomElement(['sale', 'refund']),
-                'amount' => $faker->randomFloat(2, 10, 1000),
-                'date' => Carbon::now()->subDays(rand(0, 365)),
-                'note' => $faker->sentence,
+                'type' => $faker->randomElement(['in', 'out']),
+                'amount' => $faker->randomFloat(2, 1, 100),
+                'date' => $faker->dateTimeBetween('-1 year', 'now'),
+                'notes' => $faker->sentence,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

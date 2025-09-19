@@ -4,30 +4,26 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use Faker\Factory as Faker;
 
 class CustomerSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $faker = Faker::create();
 
-        foreach (range(1, 30) as $i) {
+        foreach (range(1, 20) as $i) {
             DB::table('customers')->insert([
                 'company_name' => $faker->company,
                 'name' => $faker->name,
                 'phone_number' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'address' => $faker->address,
-                'tax_number' => $faker->ean8,
-                'website' => $faker->url,
+                'tax_number' => $faker->randomNumber(8),
+                'website' => $faker->domainName,
                 'description' => $faker->sentence,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
