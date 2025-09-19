@@ -22,8 +22,6 @@ class CustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
-            'status_id' => 'required|exists:customer_statuses,id',
             'company_name' => 'required|string|max:55',
             'name' => 'required|string|max:55',
             'phone_number' => 'nullable|string|max:20',

@@ -1,7 +1,5 @@
 interface Customer {
   id: number;
-  user: User | null;
-  status: CustomerStatus;
   company_name: string;
   name: string;
   phone_number: string | null;
@@ -12,9 +10,4 @@ interface Customer {
   description: string | null;
   created_at: string;
   updated_at?: string;
-}
-
-interface CustomerStatus {
-  id: number;
-  name: string;
 }

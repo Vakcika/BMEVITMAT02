@@ -14,15 +14,8 @@ class Transaction extends Model
     protected $fillable = [
         'id',
         'customer_id',
-        'currency_id',
-        'created_by_id',
-        'subscription_id',
-        'transaction_type_id',
         'amount',
-        'amount_in_base',
-        'transaction_date',
-        'due_date',
-        'payment_date',
+        'date',
         'note',
     ];
 
@@ -40,25 +33,5 @@ class Transaction extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
-    }
-
-    public function currency()
-    {
-        return $this->belongsTo(Currency::class);
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by_id');
-    }
-
-    public function subscription()
-    {
-        return $this->belongsTo(Subscription::class);
-    }
-
-    public function type()
-    {
-        return $this->belongsTo(TransactionType::class, 'transaction_type_id');
     }
 }

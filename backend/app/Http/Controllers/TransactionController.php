@@ -16,11 +16,7 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $validated = $request->validate([
-            'currency' => 'nullable|string|exists:currencies,code',
-            'customer' => 'nullable|string|exists:customers,id',
-            'subscription' => 'nullable|string|exists:subscriptions,id',
-            'type' => 'nullable|string|exists:transaction_types,name',
-            'year' => 'nullable|integer|min:1900|max:' . now()->year,
+            'year' => 'nullable|integer|min:2000|max:' . now()->year,
             'sort_by' => 'nullable|in:amount,amount_in_base,transaction_date,created_at,updated_at',
             'sort_dir' => 'nullable|in:asc,desc',
             'per_page' => 'nullable|integer|min:1|max:100',
@@ -28,30 +24,6 @@ class TransactionController extends Controller
         ]);
 
         $query = Transaction::query();
-
-        if (!empty($validated['currency'])) {
-            $query->whereHas('currency', function ($q) use ($validated) {
-                $q->where('code', $validated['currency']);
-            });
-        }
-
-        if (!empty($validated['customer'])) {
-            $query->whereHas('customer', function ($q) use ($validated) {
-                $q->where('id', $validated['customer']);
-            });
-        }
-
-        if (!empty($validated['type'])) {
-            $query->whereHas('type', function ($q) use ($validated) {
-                $q->where('name', $validated['type']);
-            });
-        }
-
-        if (!empty($validated['subscription'])) {
-            $query->whereHas('subscription', function ($q) use ($validated) {
-                $q->where('id', $validated['subscription']);
-            });
-        }
 
         if (!empty($validated['year'])) {
             $query->whereYear('transaction_date', $validated['year']);
