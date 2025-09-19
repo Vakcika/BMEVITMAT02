@@ -5,26 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Transaction extends Model
+class Cast extends Model
 {
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
         'id',
-        'customer_id',
+        'product_id',
         'order_id',
-        'name',
-        'type',
+        'material_id',
         'amount',
+        'amount_successful',
+        'wrought',
+        'reserved',
+        'marked',
+        'comment',
         'date',
-        'note',
     ];
 
     protected static function boot()
     {
         parent::boot();
-
         static::creating(function ($model) {
             if (!$model->id) {
                 $model->id = (string) Str::uuid();
@@ -32,13 +34,18 @@ class Transaction extends Model
         });
     }
 
-    public function customer()
+    public function product()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
     }
 }

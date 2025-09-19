@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Transaction extends Model
+class MaterialHistory extends Model
 {
     public $incrementing = false;
     protected $keyType = 'string';
@@ -13,18 +13,18 @@ class Transaction extends Model
     protected $fillable = [
         'id',
         'customer_id',
+        'material_id',
         'order_id',
         'name',
         'type',
         'amount',
         'date',
-        'note',
+        'notes',
     ];
 
     protected static function boot()
     {
         parent::boot();
-
         static::creating(function ($model) {
             if (!$model->id) {
                 $model->id = (string) Str::uuid();
@@ -35,6 +35,11 @@ class Transaction extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
     }
 
     public function order()
