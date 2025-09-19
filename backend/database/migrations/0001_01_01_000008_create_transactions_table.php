@@ -14,15 +14,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('currency_id')->constrained()->onDelete('cascade');
-            $table->foreignId('created_by_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('subscription_id')->nullable()->constrained()->onDelete('set null');
-            $table->foreignId('transaction_type_id')->constrained('transaction_types')->onDelete('restrict');
             $table->double('amount', 15, 2);
-            $table->double('amount_in_base', 15, 2);
-            $table->dateTime('transaction_date');
-            $table->date('due_date')->nullable();
-            $table->date('payment_date')->nullable();
+            $table->dateTime('date');
             $table->text('note')->nullable();
             $table->timestamps();
         });

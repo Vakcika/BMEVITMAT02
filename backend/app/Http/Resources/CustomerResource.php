@@ -17,11 +17,6 @@ class CustomerResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
-            'status' => $this->status ? [
-                'id' => $this->status->id,
-                'name' => $this->status->name,
-            ] : null,
             'company_name' => $this->company_name,
             'name' => $this->name,
             'phone_number' => $this->phone_number,
