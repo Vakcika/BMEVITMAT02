@@ -19,7 +19,7 @@ class ProductRequest extends FormRequest
             'gem_count' => 'nullable|integer|min:0',
             'weight' => 'nullable|numeric|min:0',
             'size' => 'nullable|string|max:255',
-            'img_url' => 'nullable|string|max:255',
+            'image_url' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
             'gems' => 'array',
             'gems.*.id' => 'required|exists:gems,id',

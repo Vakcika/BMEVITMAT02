@@ -13,6 +13,7 @@ import ListCustomers from "./components/app/customers/ListCustomers";
 import ViewCustomer from "./components/app/customers/ViewCustomer";
 import EditCustomer from "./components/app/customers/EditCustomer";
 import Dashboard from "./components/app/dashboard/Dashboard";
+import ListProducts from "./components/app/products/ListProducts";
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -58,6 +59,7 @@ function App() {
                   path="/app/customer/:id/edit"
                   element={<EditCustomer />}
                 />
+                <Route path="products" element={<ListProducts />} />
               </Route>
               <Route path="*" element={<Page404 />} />
             </Routes>

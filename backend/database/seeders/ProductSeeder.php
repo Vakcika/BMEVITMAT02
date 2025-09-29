@@ -18,12 +18,13 @@ class ProductSeeder extends Seeder
 
         foreach (range(1, 30) as $i) {
             DB::table('products')->insert([
+                'name' => $faker->name,
                 'category_id' => $faker->randomElement($categories),
                 'gem_id' => $gem->id,
                 'gem_count' => $faker->numberBetween(1, 5),
                 'weight' => $faker->randomFloat(2, 1, 100),
                 'size' => $faker->randomElement(['S', 'M', 'L']),
-                'img_url' => $faker->imageUrl(300, 300, 'jewelry'),
+                'image_url' => 'https://goldatti.cdn.shoprenter.hu/custom/goldatti/image/cache/w350h350wt1q100/product/termek/00'. $faker->numberBetween(1, 9).'s.jpg',
                 'notes' => $faker->sentence,
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -42,7 +42,7 @@ class ProductController extends Controller
             'gem_id' => 'nullable|exists:gems,id',
             'weight' => 'required|numeric|min:0',
             'size' => 'required|string|max:255',
-            'img_url' => 'nullable|url',
+            'image_url' => 'nullable|url',
             'notes' => 'nullable|string',
         ]);
 
@@ -69,7 +69,7 @@ class ProductController extends Controller
             'gem_id' => 'nullable|exists:gems,id',
             'weight' => 'required|numeric|min:0',
             'size' => 'required|string|max:255',
-            'img_url' => 'nullable|url',
+            'image_url' => 'nullable|url',
             'notes' => 'nullable|string',
         ]);
 

@@ -8,6 +8,7 @@ import {
   Logs,
   ReceiptText,
   Settings,
+  Gem,
 } from "lucide-react";
 import SideBarBottom from "./SideBarBottom";
 import SideBarBrand from "./SideBarBrand";
@@ -60,12 +61,20 @@ export default function SideBar() {
             active={location.pathname === "/app/customers"}
           />
           <SideBarItem
-            href={"/app/inventory"}
+            href={"/app/products"}
             sideBarIcon={
               <Logs className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
             }
-            sideBarName="Inventory"
-            active={location.pathname === "/app/inventory"}
+            sideBarName="Products"
+            active={location.pathname === "/app/products"}
+          />
+          <SideBarItem
+            href={"/app/gems"}
+            sideBarIcon={
+              <Gem className="h-6 w-6 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
+            }
+            sideBarName="Gems"
+            active={location.pathname === "/app/gems"}
           />
           <SideBarItem
             href={"/app/statements"}

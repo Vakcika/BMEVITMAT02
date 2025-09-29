@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
+        'name',
         'category_id',
         'gem_id',
         'gem_count',
         'weight',
         'size',
-        'img_url',
+        'image_url',
         'notes',
     ];
 
