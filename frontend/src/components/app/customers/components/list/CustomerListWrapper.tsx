@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
-
-import useHttpGet from "@/api/useHttpGet";
-import useHttpDelete from "@/api/useHttpDelete";
-
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { CustomerTable } from "./CustomerTable";
+import useGetCustomersPaginated from "../../hooks/useGetCustomerPaginated";
+import useDeleteCustomer from "../../hooks/useDeleteCustomer";
 
 export default function CustomerListWrapper({
   title = "Customers",
@@ -21,15 +19,10 @@ export default function CustomerListWrapper({
 
   const [searchParams] = useSearchParams();
   const queryString = searchParams.toString();
-  const query = useHttpGet<PagableResourceWrapper<Customer[]>>(
-    `${baseUrl}?per_page=${rows}&page=${page}${queryParams}&${queryString}`
-  );
-  if (query.error) {
-    toast.error(query.error.message || "Failed to load customers.");
-    console.error(query.error);
-  }
+  const { customers, meta, isLoading, isFetching, refetch } =
+    useGetCustomersPaginated(rows, page, queryParams, queryString, baseUrl);
 
-  const deleteMutation = useHttpDelete(baseUrl, query);
+  const { deleteCustomer } = useDeleteCustomer(baseUrl, { refetch });
 
   const handleView = (customer: Customer) => {
     navigate(`/app/customer/${customer.id}`);
@@ -41,9 +34,9 @@ export default function CustomerListWrapper({
 
   const handleDelete = async (customer: Customer) => {
     try {
-      await deleteMutation.mutateAsync(customer.id);
+      await deleteCustomer(customer.id);
       toast.success("Customer deleted successfully");
-      await query.refetch();
+      await refetch();
     } catch (error: any) {
       toast.error(
         error?.response?.data?.message ??
@@ -65,13 +58,13 @@ export default function CustomerListWrapper({
       </div>
       <div className="bg-white rounded-lg shadow">
         <CustomerTable
-          value={query.data?.data ?? []}
-          loading={query.isLoading || query.isFetching}
+          value={customers}
+          loading={isLoading || isFetching}
           title={title}
           onView={handleView}
           onDelete={handleDelete}
           paginationProps={{
-            totalRecords: query.data?.meta.total ?? 0,
+            totalRecords: meta?.total ?? 0,
             rows,
             page,
             setRows,

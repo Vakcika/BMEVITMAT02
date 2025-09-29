@@ -5,14 +5,15 @@ import { Formik, Form } from "formik";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
 import LoadingCircle from "@/components/common/LoadingCircle";
-import useCustomerData from "./hooks/useCustomerData";
 import { CustomerSchema } from "../validationSchemas";
 import FormActions from "../../common/form/FormAction";
 import Description from "./components/edit/Description";
 import Address from "./components/edit/Address";
 import CompanyInformation from "./components/edit/CompanyInformation";
 import ContactInformation from "./components/edit/ContactInfromation";
-import { useCustomerMutations } from "./hooks/useCustomerDataMutation";
+import useGetCustomer from "./hooks/useGetCustomer";
+import useCreateCustomer from "./hooks/useCreateCustomer";
+import useUpdateCustomer from "./hooks/useUpdateCustomer";
 
 interface EditCustomerProps {
   isNew?: boolean;
@@ -24,8 +25,9 @@ export default function EditCustomer({
   const { id } = useParams();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { customerData, isLoading } = useCustomerData(isNew);
-  const { createCustomer, updateCustomer } = useCustomerMutations();
+  const { customerData, isLoading } = useGetCustomer(isNew);
+  const { createCustomer } = useCreateCustomer();
+  const { updateCustomer } = useUpdateCustomer();
 
   const handleSubmit = async (values: Customer) => {
     setIsSubmitting(true);

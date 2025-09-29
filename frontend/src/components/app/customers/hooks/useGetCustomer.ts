@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import useHttpGet from "@/api/useHttpGet";
 
-export default function useCustomerData(isNew: boolean) {
+export default function useGetCustomer(isNew: boolean) {
   const { id } = useParams();
 
   const initialValues: Customer = {
