@@ -23,4 +23,11 @@ class Gem extends Model
     {
         return $this->belongsTo(GemShape::class, 'shape_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_gems')
+            ->withPivot('count')
+            ->withTimestamps();
+    }
 }

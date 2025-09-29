@@ -14,12 +14,12 @@ class ProductSeeder extends Seeder
     {
         $faker = Faker::create();
         $categories = ProductCategory::pluck('id')->toArray();
-        $gems = Gem::pluck('id')->toArray();
+        $gem = Gem::first() ?? Gem::factory()->create();
 
         foreach (range(1, 30) as $i) {
             DB::table('products')->insert([
                 'category_id' => $faker->randomElement($categories),
-                'gem_id' => $faker->randomElement($gems),
+                'gem_id' => $gem->id,
                 'gem_count' => $faker->numberBetween(1, 5),
                 'weight' => $faker->randomFloat(2, 1, 100),
                 'size' => $faker->randomElement(['S', 'M', 'L']),

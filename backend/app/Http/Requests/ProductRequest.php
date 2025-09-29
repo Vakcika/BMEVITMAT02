@@ -21,6 +21,9 @@ class ProductRequest extends FormRequest
             'size' => 'nullable|string|max:255',
             'img_url' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
+            'gems' => 'array',
+            'gems.*.id' => 'required|exists:gems,id',
+            'gems.*.count' => 'required|integer|min:1',
         ];
     }
 }
