@@ -13,6 +13,7 @@ import {
 import { Package } from "lucide-react";
 import { ProductCard } from "./ProductCard";
 import { ProductCardGridSkeleton } from "./skeletons/ProductCardGridSkeleton";
+import ProductFilters from "./ProductFilters";
 
 interface ProductCardGridProps {
   value: Product[];
@@ -51,7 +52,8 @@ export const ProductCardGrid = ({
     <Card className="border-0 shadow-none">
       <CardHeader className="flex flex-row items-center justify-between pb-6">
         <CardTitle>{title}</CardTitle>
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-2 gap-4">
+          <ProductFilters />
           {paginationProps && (
             <Select
               value={paginationProps.rows.toString()}

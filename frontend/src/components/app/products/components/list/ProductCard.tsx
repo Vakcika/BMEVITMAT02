@@ -40,7 +40,7 @@ export const ProductCard = ({
             item={product}
             onView={onView}
             variant="lg"
-            className="bg-white hover:bg-gray-100 text-gray-900 rounded-full shadow-lg"
+            className="bg-white hover:bg-p50 text-gray-900 rounded-full shadow-lg"
           />
           {onDelete && (
             <DeleteActionButton

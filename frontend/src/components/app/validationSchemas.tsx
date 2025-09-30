@@ -12,3 +12,25 @@ export const CustomerSchema = Yup.object().shape({
   address: Yup.string().nullable(),
   description: Yup.string().nullable(),
 });
+
+export const ProductSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  category_id: Yup.number()
+    .typeError("Category is required")
+    .required("Category is required"),
+  weight: Yup.number().nullable().min(0, "Weight must be positive"),
+  size: Yup.string().nullable().max(255, "Size must be at most 255 characters"),
+  image_url: Yup.string()
+    .nullable()
+    .url("Must be a valid URL")
+    .max(255, "Image URL too long"),
+  notes: Yup.string().nullable(),
+  gems: Yup.array().of(
+    Yup.object().shape({
+      id: Yup.number().required("Gem is required"),
+      count: Yup.number()
+        .required("Count is required")
+        .min(1, "Count must be at least 1"),
+    })
+  ),
+});
