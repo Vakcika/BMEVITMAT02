@@ -26,27 +26,27 @@ export default function CustomerDetailsCard({
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <DetailWithIcon
-            icon={<Building className="w-6 h-6 text-n100" />}
+            icon={<Building className="w-6 h-6 text-p300" />}
             label="Company"
             value={customer.company_name}
           />
           <DetailWithIcon
-            icon={<User className="w-6 h-6 text-n100" />}
+            icon={<User className="w-6 h-6 text-green-500" />}
             label="Contact Name"
             value={customer.name}
           />
           <DetailWithIcon
-            icon={<Mail className="w-6 h-6 text-n100" />}
+            icon={<Mail className="w-6 h-6 text-teal-500" />}
             label="Email"
             value={<EmailLink customer={customer} />}
           />
           <DetailWithIcon
-            icon={<Phone className="w-6 h-6 text-n100" />}
+            icon={<Phone className="w-6 h-6 text-rose-500" />}
             label="Phone"
             value={<PhoneLink customer={customer} />}
           />
           <DetailWithIcon
-            icon={<Globe className="w-6 h-6 text-n100" />}
+            icon={<Globe className="w-6 h-6 text-sky-500" />}
             label="Website"
             value={
               customer.website ? <WebsiteLink url={customer.website} /> : "N/A"
