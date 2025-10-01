@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gems', function (Blueprint $table) {
             $table->id();
-            $table->double('size');
+            $table->string('size');
             $table->foreignId('color_id')->constrained('gem_colors')->onDelete('cascade');
             $table->foreignId('shape_id')->constrained('gem_shapes')->onDelete('cascade');
             $table->integer('price');

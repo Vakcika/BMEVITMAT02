@@ -14,7 +14,7 @@ class GemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'size' => 'required|numeric|min:0',
+            'size' => 'required|string|max:255',
             'color_id' => 'required|exists:gem_colors,id',
             'shape_id' => 'required|exists:gem_shapes,id',
             'price' => 'required|numeric|min:0',

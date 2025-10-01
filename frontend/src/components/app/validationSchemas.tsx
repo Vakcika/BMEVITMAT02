@@ -34,3 +34,27 @@ export const ProductSchema = Yup.object().shape({
     })
   ),
 });
+
+export const GemShapeSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+});
+
+export const GemColorSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+});
+
+export const GemSchema = Yup.object().shape({
+  size: Yup.string()
+    .required("Gem size is required")
+    .trim()
+    .min(1, "Gem size cannot be empty"),
+  color: GemColorSchema.required("Gem color is required"),
+  shape: GemShapeSchema.required("Gem shape is required"),
+  price: Yup.number()
+    .required("Price is required")
+    .min(0, "Price cannot be negative"),
+  booking_price: Yup.number()
+    .required("Booking price is required")
+    .min(0, "Booking price cannot be negative"),
+  updated_at: Yup.string().optional(),
+});

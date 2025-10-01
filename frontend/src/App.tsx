@@ -16,6 +16,10 @@ import Dashboard from "./components/app/dashboard/Dashboard";
 import ListProducts from "./components/app/products/ListProducts";
 import ViewProduct from "./components/app/products/ViewProduct";
 import EditProduct from "./components/app/products/EditProduct";
+import Gems from "./components/app/gems/Gems";
+import ViewGemShape from "./components/app/gems/components/gem-shapes/view/ViewGemShape";
+import ViewGemColor from "./components/app/gems/components/gem-colors/view/ViewGemColor";
+import ViewGem from "./components/app/gems/components/gems/view/ViewGems";
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -70,6 +74,28 @@ function App() {
                 <Route
                   path="/app/products/:id/edit"
                   element={<EditProduct />}
+                />
+                <Route path="gems" element={<Gems />} />
+                <Route
+                  path="/app/gems/new"
+                  element={<ViewGem isNew={true} />}
+                />
+                <Route path="/app/gems/:id" element={<ViewGem />} />
+                <Route
+                  path="/app/gems/gem-shape/new"
+                  element={<ViewGemShape isNew={true} />}
+                />
+                <Route
+                  path="/app/gems/gem-shape/:id"
+                  element={<ViewGemShape />}
+                />
+                <Route
+                  path="/app/gems/gem-color/new"
+                  element={<ViewGemColor isNew={true} />}
+                />
+                <Route
+                  path="/app/gems/gem-color/:id"
+                  element={<ViewGemColor />}
                 />
               </Route>
               <Route path="*" element={<Page404 />} />

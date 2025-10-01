@@ -3,13 +3,6 @@ interface ProductCategory {
   name: string;
 }
 
-interface Gem {
-  id: number;
-  color_name: string;
-  shape_name: string;
-  size: string;
-}
-
 interface ProductGem {
   id: number;
   count: number;

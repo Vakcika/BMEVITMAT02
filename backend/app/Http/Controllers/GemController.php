@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gem;
 use App\Http\Resources\GemResource;
+use App\Http\Requests\GemRequest;
 use Illuminate\Http\Request;
 
 class GemController extends Controller
@@ -35,15 +36,9 @@ class GemController extends Controller
     /**
      * Store a newly created gem in storage.
      */
-    public function store(Request $request)
+    public function store(GemRequest $request)
     {
-        $validated = $request->validate([
-            'size' => 'nullable|numeric|min:0',
-            'color_id' => 'required|exists:gem_colors,id',
-            'shape_id' => 'required|exists:gem_shapes,id',
-            'price' => 'required|integer|min:0',
-            'booking_price' => 'nullable|integer|min:0',
-        ]);
+        $validated = $request->validated();
 
         return Gem::create($validated);
     }
@@ -59,17 +54,11 @@ class GemController extends Controller
     /**
      * Update the specified gem in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GemRequest $request, string $id)
     {
-        $gem = Gem::findOrFail($id);
 
-        $validated = $request->validate([
-            'size' => 'nullable|numeric|min:0',
-            'color_id' => 'required|exists:gem_colors,id',
-            'shape_id' => 'required|exists:gem_shapes,id',
-            'price' => 'required|integer|min:0',
-            'booking_price' => 'nullable|integer|min:0',
-        ]);
+        $validated = $request->validated();
+        $gem = Gem::findOrFail($id);
 
         $gem->update($validated);
 
