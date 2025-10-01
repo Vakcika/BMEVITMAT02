@@ -58,3 +58,9 @@ export const GemSchema = Yup.object().shape({
     .min(0, "Booking price cannot be negative"),
   updated_at: Yup.string().optional(),
 });
+
+export const ShippingPriceSchema = Yup.object().shape({
+  price: Yup.number()
+    .required("Price is required")
+    .min(0, "Price cannot be negative"),
+});

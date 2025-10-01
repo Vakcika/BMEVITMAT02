@@ -31,3 +31,10 @@ interface ProductFormValues {
   image_url?: string;
   notes?: string;
 }
+
+interface ShippingPrice {
+  id: number;
+  price: number;
+  created_at?: string;
+  updated_at: string;
+}

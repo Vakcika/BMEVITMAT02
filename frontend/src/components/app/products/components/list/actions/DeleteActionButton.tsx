@@ -66,7 +66,7 @@ export function DeleteActionButton<T>({
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete{" "}
-              <strong>{getItemLabel()}</strong>.
+              <strong>{getItemLabel()}</strong> and its associated data.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

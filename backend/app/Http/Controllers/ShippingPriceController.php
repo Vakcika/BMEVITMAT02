@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ShippingPrice;
 use App\Http\Resources\ShippingPriceResource;
+use App\Http\Requests\ShippingPriceRequest;
 use Illuminate\Http\Request;
 
 class ShippingPriceController extends Controller
@@ -14,7 +15,7 @@ class ShippingPriceController extends Controller
     public function index(Request $request)
     {
         $validated = $request->validate([
-            'sort_by' => 'nullable|in:id,country,price,created_at,updated_at',
+            'sort_by' => 'nullable|in:id,price,created_at,updated_at',
             'sort_dir' => 'nullable|in:asc,desc',
             'per_page' => 'nullable|integer|min:1|max:100',
             'page' => 'nullable|integer|min:1',
@@ -35,12 +36,9 @@ class ShippingPriceController extends Controller
     /**
      * Store a newly created shipping price in storage.
      */
-    public function store(Request $request)
+    public function store(ShippingPriceRequest $request)
     {
-        $validated = $request->validate([
-            'country' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-        ]);
+        $validated = $request->validated();
 
         return ShippingPrice::create($validated);
     }
@@ -56,14 +54,11 @@ class ShippingPriceController extends Controller
     /**
      * Update the specified shipping price in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ShippingPriceRequest $request, string $id)
     {
-        $price = ShippingPrice::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'country' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-        ]);
+        $price = ShippingPrice::findOrFail($id);
 
         $price->update($validated);
 
