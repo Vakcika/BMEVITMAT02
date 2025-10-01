@@ -1,5 +1,5 @@
 import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
-import ProductListWrapper from "./components/list/ProductListWrapper";
+import ProductList from "./components/list/ProductList";
 
 export default function ListCustomers() {
   const breadcrumbs = [{ label: "Products", url: "/app/prodcuts" }];
@@ -7,7 +7,7 @@ export default function ListCustomers() {
   return (
     <div className="p-4">
       <CustomBreadCrumb model={breadcrumbs} />
-      <ProductListWrapper />
+      <ProductList />
     </div>
   );
 }

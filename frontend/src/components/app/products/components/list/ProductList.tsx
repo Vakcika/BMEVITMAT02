@@ -13,7 +13,7 @@ interface WrapperProps {
   queryParams?: string;
 }
 
-export default function ProductListWrapper({
+export default function ProductList({
   title = "Products",
   defaultRows = 24,
   baseUrl = "/api/products",
