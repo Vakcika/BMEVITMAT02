@@ -20,8 +20,9 @@ import Gems from "./components/app/gems/Gems";
 import ViewGemShape from "./components/app/gems/components/gem-shapes/view/ViewGemShape";
 import ViewGemColor from "./components/app/gems/components/gem-colors/view/ViewGemColor";
 import ViewGem from "./components/app/gems/components/gems/view/ViewGems";
-import Settings from "./components/app/settings/Settings";
 import ViewShippingPrice from "./components/app/settings/components/shipping/view/ViewShippingPrice";
+import Settings from "./components/app/settings/Settings";
+import ViewMaterial from "./components/app/settings/components/material/view/ViewMaterial";
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -107,6 +108,14 @@ function App() {
                 <Route
                   path="/app/settings/shipping/:id"
                   element={<ViewShippingPrice />}
+                />
+                <Route
+                  path="/app/settings/materials/new"
+                  element={<ViewMaterial isNew={true} />}
+                />
+                <Route
+                  path="/app/settings/materials/:id"
+                  element={<ViewMaterial />}
                 />
               </Route>
               <Route path="*" element={<Page404 />} />

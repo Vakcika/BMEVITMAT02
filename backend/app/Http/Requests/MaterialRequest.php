@@ -15,8 +15,8 @@ class MaterialRequest extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id',
-            'material_type' => 'required|string',
-            'material_name' => 'required|string|max:255',
+            'type' => 'required|string',
+            'name' => 'required|string|max:255',
             'raw_casting_price' => 'required|numeric|min:0',
             'wrought_casting_price' => 'required|numeric|min:0',
             'raw_casting_loss' => 'required|numeric|min:0',

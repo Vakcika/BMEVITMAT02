@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use App\Http\Resources\MaterialResource;
+use App\Http\Requests\MaterialRequest;
 use Illuminate\Http\Request;
 
 class MaterialController extends Controller
@@ -22,7 +23,7 @@ class MaterialController extends Controller
 
         $query = Material::query();
 
-        $query->orderBy($validated['sort_by'] ?? 'id', $validated['sort_dir'] ?? 'desc');
+        $query->orderBy($validated['sort_by'] ?? 'id', $validated['sort_dir'] ?? 'asc');
 
         $perPage = $validated['per_page'] ?? 10;
         $page = $validated['page'] ?? 1;
@@ -35,22 +36,9 @@ class MaterialController extends Controller
     /**
      * Store a newly created material in storage.
      */
-    public function store(Request $request)
+    public function store(MaterialRequest $request)
     {
-        $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'material_type' => 'required|string|max:50',
-            'material_name' => 'required|string|max:255',
-            'raw_casting_price' => 'required|integer|min:0',
-            'wrought_casting_price' => 'required|integer|min:0',
-            'raw_casting_loss' => 'nullable|numeric|min:0',
-            'wrought_casting_loss' => 'nullable|numeric|min:0',
-            'mark_price' => 'nullable|integer|min:0',
-            'trade_in_price' => 'nullable|integer|min:0',
-            'stub_placement_price' => 'nullable|integer|min:0',
-            'stub_removal_price' => 'nullable|integer|min:0',
-            'extra_charge' => 'nullable|integer|min:0',
-        ]);
+        $validated = $request->validated();
 
         return Material::create($validated);
     }
@@ -66,24 +54,12 @@ class MaterialController extends Controller
     /**
      * Update the specified material in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MaterialRequest $request, string $id)
     {
+        $validated = $request->validated();
+
         $material = Material::findOrFail($id);
 
-        $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'material_type' => 'required|string|max:50',
-            'material_name' => 'required|string|max:255',
-            'raw_casting_price' => 'required|integer|min:0',
-            'wrought_casting_price' => 'required|integer|min:0',
-            'raw_casting_loss' => 'nullable|numeric|min:0',
-            'wrought_casting_loss' => 'nullable|numeric|min:0',
-            'mark_price' => 'nullable|integer|min:0',
-            'trade_in_price' => 'nullable|integer|min:0',
-            'stub_placement_price' => 'nullable|integer|min:0',
-            'stub_removal_price' => 'nullable|integer|min:0',
-            'extra_charge' => 'nullable|integer|min:0',
-        ]);
 
         $material->update($validated);
 

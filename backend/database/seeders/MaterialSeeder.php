@@ -17,8 +17,8 @@ class MaterialSeeder extends Seeder
         foreach (range(1, 15) as $i) {
             DB::table('materials')->insert([
                 'customer_id' => $faker->randomElement($customers),
-                'material_type' => $faker->randomElement(['14K', '18K', 'SILVER', 'BRONZE']),
-                'material_name' => $faker->word,
+                'type' => $faker->randomElement(['14K', '18K', 'SILVER', 'BRONZE']),
+                'name' => $faker->word,
                 'raw_casting_price' => $faker->numberBetween(100, 500),
                 'wrought_casting_price' => $faker->numberBetween(200, 800),
                 'raw_casting_loss' => $faker->randomFloat(2, 0, 10),
