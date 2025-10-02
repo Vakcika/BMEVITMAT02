@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import useGetShippingPricesPaginated from "../hooks/useGetShippingPricePaginated";
-import useDeleteShippingPrice from "../hooks/useDeleteShippingPrice";
-import { ShippingPriceTable } from "./ShippingPriceTable";
+import useGetProductCategorysPaginated from "../hooks/useGetProductCategoriesPaginated";
+import useDeleteProductCategory from "../hooks/useDeleteProductCategory";
+import { ProductCategoryTable } from "./ProductCategoryTable";
 
-export default function ShippingPriceList({
-  title = "Shipping prices",
+export default function ProductCategoryList({
+  title = "Product categories",
   defaultRows = 5,
-  baseUrl = "/api/shipping-prices",
+  baseUrl = "/api/product-categories",
   queryParams = "",
 }: Readonly<WrapperProps>) {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function ShippingPriceList({
   const queryString = searchParams.toString();
 
   const { data, meta, isLoading, isFetching, refetch } =
-    useGetShippingPricesPaginated(
+    useGetProductCategorysPaginated(
       rows,
       page,
       queryParams,
@@ -27,18 +27,20 @@ export default function ShippingPriceList({
       baseUrl
     );
 
-  const { deleteShippingPrice } = useDeleteShippingPrice(baseUrl, { refetch });
+  const { deleteProductCategory } = useDeleteProductCategory(baseUrl, {
+    refetch,
+  });
 
-  const handleView = (data: ShippingPrice) => {
-    navigate(`/app/settings/shipping/${data.id}`);
+  const handleView = (data: ProductCategory) => {
+    navigate(`/app/settings/product-categories/${data.id}`);
   };
 
   const handleCreate = () => {
-    navigate("/app/settings/shipping/new");
+    navigate("/app/settings/product-categories/new");
   };
 
-  const handleDelete = async (data: ShippingPrice) => {
-    await deleteShippingPrice(data.id);
+  const handleDelete = async (data: ProductCategory) => {
+    await deleteProductCategory(data.id);
     await refetch();
   };
 
@@ -51,7 +53,7 @@ export default function ShippingPriceList({
         </Button>
       </div>
       <div className="bg-white rounded-lg shadow">
-        <ShippingPriceTable
+        <ProductCategoryTable
           value={data}
           loading={isLoading || isFetching}
           title={title}

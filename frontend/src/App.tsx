@@ -22,6 +22,7 @@ import ViewGem from "./components/app/gems/components/gems/view/ViewGems";
 import ViewShippingPrice from "./components/app/settings/components/shipping/view/ViewShippingPrice";
 import Settings from "./components/app/settings/Settings";
 import ViewMaterial from "./components/app/settings/components/material/view/ViewMaterial";
+import ViewProductCategory from "./components/app/settings/components/product-categories/view/ViewProductCategory";
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -114,6 +115,14 @@ function App() {
                 <Route
                   path="/app/settings/materials/:id"
                   element={<ViewMaterial />}
+                />
+                <Route
+                  path="/app/settings/product-categories/new"
+                  element={<ViewProductCategory isNew={true} />}
+                />
+                <Route
+                  path="/app/settings/product-categories/:id"
+                  element={<ViewProductCategory />}
                 />
               </Route>
               <Route path="*" element={<Page404 />} />

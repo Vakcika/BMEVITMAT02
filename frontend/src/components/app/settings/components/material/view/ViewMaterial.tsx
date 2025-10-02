@@ -49,7 +49,7 @@ export default function ViewMaterial({
     { label: "Settings", url: "/app/settings" },
     { label: "Materials", url: "/app/settings" },
     {
-      label: isNew ? "New Material" : materialData.name,
+      label: isNew ? "New" : materialData.name,
       url: isNew ? "" : `/app/settings/materials/${id}`,
     },
   ];

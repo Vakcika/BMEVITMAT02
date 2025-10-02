@@ -1,17 +1,21 @@
 interface ProductCategory {
   id: number;
   name: string;
+  created_at?: string;
+  updated_at: string;
 }
 
 interface ProductGem {
   id: number;
   count: number;
+  created_at?: string;
+  updated_at: string;
 }
 
 interface Product {
   id: number;
   name: string;
-  category: string;
+  category: ProductCategory;
   gems: (Gem & { count: number })[];
   weight?: number;
   size?: string;

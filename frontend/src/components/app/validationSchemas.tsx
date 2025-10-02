@@ -65,6 +65,10 @@ export const ShippingPriceSchema = Yup.object().shape({
     .min(0, "Price cannot be negative"),
 });
 
+export const ProductCategorySchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+});
+
 export const MaterialSchema = Yup.object().shape({
   customer_id: Yup.mixed().required("Customer is required"),
   type: Yup.string()

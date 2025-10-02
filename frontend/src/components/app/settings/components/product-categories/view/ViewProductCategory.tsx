@@ -6,32 +6,32 @@ import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
 import LoadingCircle from "@/components/common/LoadingCircle";
 import { FormInput } from "@/components/common/form/FormInput";
 import FormActions from "@/components/common/form/FormAction";
-import { ShippingPriceSchema } from "@/components/app/validationSchemas";
-import useGetShippingPrice from "../hooks/useGetShippingPrice";
-import useUpdateShippingPrice from "../hooks/useUpdateShippingPrice";
-import useCreateShippingPrice from "../hooks/useCreateShippingPrice";
+import { ProductCategorySchema } from "@/components/app/validationSchemas";
+import useGetProductCategory from "../hooks/useGetProductCategory";
+import useUpdateProductCategory from "../hooks/useUpdateProductCategory";
+import useCreateProductCategory from "../hooks/useCreateProductCategory";
 
-interface EditShippingPriceProps {
+interface EditProductCategoryProps {
   isNew?: boolean;
 }
 
-export default function ViewShippingPrice({
+export default function ViewProductCategory({
   isNew = false,
-}: Readonly<EditShippingPriceProps>) {
+}: Readonly<EditProductCategoryProps>) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { shippingPriceData, isLoading } = useGetShippingPrice(isNew);
-  const { createShippingPrice } = useCreateShippingPrice();
-  const { updateShippingPrice } = useUpdateShippingPrice();
+  const { productCategoryData, isLoading } = useGetProductCategory(isNew);
+  const { createProductCategory } = useCreateProductCategory();
+  const { updateProductCategory } = useUpdateProductCategory();
 
-  const handleSubmit = async (values: ShippingPrice) => {
+  const handleSubmit = async (values: ProductCategory) => {
     setIsSubmitting(true);
     try {
       if (isNew) {
-        await createShippingPrice(values);
+        await createProductCategory(values);
       } else {
-        await updateShippingPrice(values);
+        await updateProductCategory(values);
       }
     } catch (error) {
       console.log(error);
@@ -47,10 +47,10 @@ export default function ViewShippingPrice({
 
   const breadcrumbs = [
     { label: "Settings", url: "/app/settings" },
-    { label: "Shipping", url: "/app/settings" },
+    { label: "Product category", url: "/app/settings" },
     {
-      label: isNew ? "New" : shippingPriceData.price.toString(),
-      url: isNew ? "" : `/app/settings/shipping/${id}`,
+      label: isNew ? "New" : productCategoryData.name,
+      url: isNew ? "" : `/app/settings/product-categories/${id}`,
     },
   ];
 
@@ -63,18 +63,20 @@ export default function ViewShippingPrice({
       <CustomBreadCrumb model={breadcrumbs} />
       <div className="mt-6 mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">
-          {isNew ? "Create Shipping Price" : `Edit: ${shippingPriceData.price}`}
+          {isNew
+            ? "Create Product Category"
+            : `Edit: ${productCategoryData.name}`}
         </h1>
       </div>
 
       <Card className="bg-white rounded-lg shadow">
         <CardHeader>
-          <CardTitle>Shipping Price Information</CardTitle>
+          <CardTitle>Product Category Information</CardTitle>
         </CardHeader>
         <CardContent>
           <Formik
-            initialValues={shippingPriceData}
-            validationSchema={ShippingPriceSchema}
+            initialValues={productCategoryData}
+            validationSchema={ProductCategorySchema}
             onSubmit={handleSubmit}
             enableReinitialize
           >
@@ -82,14 +84,14 @@ export default function ViewShippingPrice({
               <Form className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <FormInput
-                    id="price"
-                    name="price"
-                    label="Price*"
-                    placeholder="Shipping price"
-                    value={formik.values.price}
+                    id="name"
+                    name="name"
+                    label="Name*"
+                    placeholder="Product category"
+                    value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    error={formik.touched.price && formik.errors.price}
+                    error={formik.touched.name && formik.errors.name}
                   />
                 </div>
 
