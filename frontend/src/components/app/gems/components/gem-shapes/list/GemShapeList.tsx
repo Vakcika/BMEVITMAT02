@@ -8,7 +8,7 @@ import { GemShapeTable } from "./GemShapeTable";
 import useDeleteGemShape from "../hooks/useDeleteGemShape";
 
 export default function GemShapeList({
-  title = "Gem Shapes",
+  title = "Gem shapes",
   defaultRows = 25,
   baseUrl = "/api/gem-shapes",
   queryParams = "",

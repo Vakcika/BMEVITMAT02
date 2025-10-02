@@ -8,7 +8,7 @@ import { GemColorTable } from "./GemColorTable";
 import useDeleteGemColor from "../hooks/useDeleteGemColor";
 
 export default function GemColorList({
-  title = "Gem Colors",
+  title = "Gem colors",
   defaultRows = 25,
   baseUrl = "/api/gem-colors",
   queryParams = "",
