@@ -115,49 +115,51 @@ export default function ViewGem({ isNew = false }: Readonly<EditGemProps>) {
                     error={formik.touched.size && formik.errors.size}
                   />
 
-                  <FormSelect
-                    name="color"
-                    label="Color*"
-                    value={formik.values.color?.id?.toString() ?? ""}
-                    onChange={(value) => {
-                      const selectedColor = colors.find(
-                        (c) => c.id === Number(value)
-                      );
-                      formik.setFieldValue("color", selectedColor);
-                    }}
-                    options={colors}
-                    getOptionValue={(c) => c.id.toString()}
-                    getOptionLabel={(c) => c.name}
-                    placeholder="Select color"
-                    emptyLabel="None"
-                    error={
-                      formik.touched.color && formik.errors.color
-                        ? "Color is required"
-                        : undefined
-                    }
-                  />
+                  <div className="grid grid-cols-2">
+                    <FormSelect
+                      name="color"
+                      label="Color*"
+                      value={formik.values.color?.id?.toString() ?? ""}
+                      onChange={(value) => {
+                        const selectedColor = colors.find(
+                          (c) => c.id === Number(value)
+                        );
+                        formik.setFieldValue("color", selectedColor);
+                      }}
+                      options={colors}
+                      getOptionValue={(c) => c.id.toString()}
+                      getOptionLabel={(c) => c.name}
+                      placeholder="Select color"
+                      emptyLabel="None"
+                      error={
+                        formik.touched.color && formik.errors.color
+                          ? "Color is required"
+                          : undefined
+                      }
+                    />
 
-                  <FormSelect
-                    name="shape"
-                    label="Shape*"
-                    value={formik.values.shape?.id?.toString() ?? ""}
-                    onChange={(value) => {
-                      const selectedShape = shapes.find(
-                        (s) => s.id === Number(value)
-                      );
-                      formik.setFieldValue("shape", selectedShape);
-                    }}
-                    options={shapes}
-                    getOptionValue={(s) => s.id.toString()}
-                    getOptionLabel={(s) => s.name}
-                    placeholder="Select shape"
-                    emptyLabel="None"
-                    error={
-                      formik.touched.shape && formik.errors.shape
-                        ? "Shape is required"
-                        : undefined
-                    }
-                  />
+                    <FormSelect
+                      name="shape"
+                      label="Shape*"
+                      value={formik.values.shape?.id?.toString() ?? ""}
+                      onChange={(value) => {
+                        const selectedShape = shapes.find(
+                          (s) => s.id === Number(value)
+                        );
+                        formik.setFieldValue("shape", selectedShape);
+                      }}
+                      options={shapes}
+                      getOptionValue={(s) => s.id.toString()}
+                      getOptionLabel={(s) => s.name}
+                      placeholder="Select shape"
+                      emptyLabel="None"
+                      error={
+                        formik.touched.shape && formik.errors.shape
+                          ? "Shape is required"
+                          : undefined
+                      }
+                    />
+                  </div>
 
                   <FormInput
                     id="price"

@@ -19,7 +19,7 @@ export default function Login() {
 
       if (result?.success) {
         toast.success("Login Successful");
-        navigate("/app/dashboard");
+        navigate("/app/customers");
       } else {
         toast.error("Invalid email or password. Please try again.");
       }

@@ -12,7 +12,6 @@ import useIsAuthenticated from "./auth/useIsAuthenticated";
 import ListCustomers from "./components/app/customers/ListCustomers";
 import ViewCustomer from "./components/app/customers/ViewCustomer";
 import EditCustomer from "./components/app/customers/EditCustomer";
-import Dashboard from "./components/app/dashboard/Dashboard";
 import ListProducts from "./components/app/products/ListProducts";
 import ViewProduct from "./components/app/products/ViewProduct";
 import EditProduct from "./components/app/products/EditProduct";
@@ -57,7 +56,6 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/app" element={<AppLayout />}>
-                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="customers" element={<ListCustomers />} />
                 <Route
                   path="/app/customer/new"
@@ -66,7 +64,7 @@ function App() {
                 <Route path="/app/customer/:id" element={<ViewCustomer />} />
                 <Route
                   path="/app/customer/:id/edit"
-                  element={<EditProduct />}
+                  element={<EditCustomer />}
                 />
                 <Route path="products" element={<ListProducts />} />
                 <Route
