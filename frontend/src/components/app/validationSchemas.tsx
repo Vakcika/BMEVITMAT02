@@ -69,6 +69,13 @@ export const ProductCategorySchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
 });
 
+export const UserSchema = Yup.object().shape({
+  name: Yup.string().required("User name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+});
+
 export const MaterialSchema = Yup.object().shape({
   customer_id: Yup.mixed().required("Customer is required"),
   type: Yup.string()

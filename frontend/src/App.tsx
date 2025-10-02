@@ -23,6 +23,7 @@ import ViewShippingPrice from "./components/app/settings/components/shipping/vie
 import Settings from "./components/app/settings/Settings";
 import ViewMaterial from "./components/app/settings/components/material/view/ViewMaterial";
 import ViewProductCategory from "./components/app/settings/components/product-categories/view/ViewProductCategory";
+import ViewUser from "./components/app/settings/components/users/view/ViewUser";
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -124,6 +125,11 @@ function App() {
                   path="/app/settings/product-categories/:id"
                   element={<ViewProductCategory />}
                 />
+                <Route
+                  path="/app/settings/users/new"
+                  element={<ViewUser isNew={true} />}
+                />
+                <Route path="/app/settings/users/:id" element={<ViewUser />} />
               </Route>
               <Route path="*" element={<Page404 />} />
             </Routes>
