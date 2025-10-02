@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\MaterialHistory;
 use App\Http\Resources\MaterialHistoryResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\MaterialHistoryRequest;
+
 
 class MaterialHistoryController extends Controller
 {
@@ -35,14 +37,9 @@ class MaterialHistoryController extends Controller
     /**
      * Store a newly created material history in storage.
      */
-    public function store(Request $request)
+    public function store(MaterialHistoryRequest $request)
     {
-        $validated = $request->validate([
-            'material_id' => 'required|exists:materials,id',
-            'old_price' => 'required|integer|min:0',
-            'new_price' => 'required|integer|min:0',
-            'changed_at' => 'required|date',
-        ]);
+        $validated = $request->validated();
 
         return MaterialHistory::create($validated);
     }
@@ -58,16 +55,11 @@ class MaterialHistoryController extends Controller
     /**
      * Update the specified material history in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MaterialHistoryRequest $request, string $id)
     {
-        $history = MaterialHistory::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'material_id' => 'required|exists:materials,id',
-            'old_price' => 'required|integer|min:0',
-            'new_price' => 'required|integer|min:0',
-            'changed_at' => 'required|date',
-        ]);
+        $history = MaterialHistory::findOrFail($id);
 
         $history->update($validated);
 

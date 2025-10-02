@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Http\Resources\RoleResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\RoleRequest;
 
 class RoleController extends Controller
 {
@@ -35,11 +36,9 @@ class RoleController extends Controller
     /**
      * Store a newly created role in storage.
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name',
-        ]);
+        $validated = $request->validated();
 
         return Role::create($validated);
     }
@@ -55,13 +54,11 @@ class RoleController extends Controller
     /**
      * Update the specified role in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoleRequest $request, string $id)
     {
-        $role = Role::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name,' . $id,
-        ]);
+        $role = Role::findOrFail($id);
 
         $role->update($validated);
 

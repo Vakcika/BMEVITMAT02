@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\GemColor;
 use App\Http\Resources\GemColorResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\GemColorRequest;
+
 
 class GemColorController extends Controller
 {
@@ -35,11 +37,9 @@ class GemColorController extends Controller
     /**
      * Store a newly created gem color in storage.
      */
-    public function store(Request $request)
+    public function store(GemColorRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:gem_colors,name',
-        ]);
+        $validated = $request->validated();
 
         return GemColor::create($validated);
     }
@@ -55,13 +55,12 @@ class GemColorController extends Controller
     /**
      * Update the specified gem color in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GemColorRequest $request, string $id)
     {
+        $validated = $request->validated();
+
         $color = GemColor::findOrFail($id);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:gem_colors,name,' . $id,
-        ]);
 
         $color->update($validated);
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Resources\OrderResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
+
 
 class OrderController extends Controller
 {
@@ -35,14 +37,9 @@ class OrderController extends Controller
     /**
      * Store a newly created order in storage.
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'product_id' => 'required|exists:products,id',
-            'order_date' => 'required|date',
-            'status' => 'required|string|max:50',
-        ]);
+        $validated = $request->validated();
 
         return Order::create($validated);
     }
@@ -58,16 +55,11 @@ class OrderController extends Controller
     /**
      * Update the specified order in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(OrderRequest $request, string $id)
     {
-        $order = Order::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'product_id' => 'required|exists:products,id',
-            'order_date' => 'required|date',
-            'status' => 'required|string|max:50',
-        ]);
+        $order = Order::findOrFail($id);
 
         $order->update($validated);
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProductGem;
 use App\Http\Resources\ProductGemResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductGemRequest;
+
 
 class ProductGemController extends Controller
 {
@@ -35,13 +37,9 @@ class ProductGemController extends Controller
     /**
      * Store a newly created product-gem in storage.
      */
-    public function store(Request $request)
+    public function store(ProductGemRequest $request)
     {
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'gem_id' => 'required|exists:gems,id',
-            'count' => 'required|integer|min:1',
-        ]);
+        $validated = $request->validated();
 
         return ProductGem::create($validated);
     }
@@ -57,15 +55,12 @@ class ProductGemController extends Controller
     /**
      * Update the specified product-gem in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductGemRequest $request, string $id)
     {
+        $validated = $request->validated();
+
         $item = ProductGem::findOrFail($id);
 
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'gem_id' => 'required|exists:gems,id',
-            'count' => 'required|integer|min:1',
-        ]);
 
         $item->update($validated);
 

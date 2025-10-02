@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
+
 
 class ProductController extends Controller
 {
@@ -42,16 +44,9 @@ class ProductController extends Controller
     /**
      * Store a newly created product in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $validated = $request->validate([
-            'category_id' => 'required|exists:product_categories,id',
-            'gem_id' => 'nullable|exists:gems,id',
-            'weight' => 'required|numeric|min:0',
-            'size' => 'required|string|max:255',
-            'image_url' => 'nullable|url',
-            'notes' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
 
         return Product::create($validated);
     }
@@ -67,18 +62,11 @@ class ProductController extends Controller
     /**
      * Update the specified product in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
-        $product = Product::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'category_id' => 'required|exists:product_categories,id',
-            'gem_id' => 'nullable|exists:gems,id',
-            'weight' => 'required|numeric|min:0',
-            'size' => 'required|string|max:255',
-            'image_url' => 'nullable|url',
-            'notes' => 'nullable|string',
-        ]);
+        $product = Product::findOrFail($id);
 
         $product->update($validated);
 

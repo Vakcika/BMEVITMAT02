@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProductCategory;
 use App\Http\Resources\ProductCategoryResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductCategoryRequest;
+
 
 class ProductCategoryController extends Controller
 {
@@ -35,11 +37,9 @@ class ProductCategoryController extends Controller
     /**
      * Store a newly created product category in storage.
      */
-    public function store(Request $request)
+    public function store(ProductCategoryRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:product_categories,name',
-        ]);
+        $validated = $request->validated();
 
         return ProductCategory::create($validated);
     }
@@ -55,13 +55,11 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified product category in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductCategoryRequest $request, string $id)
     {
-        $category = ProductCategory::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:product_categories,name,' . $id,
-        ]);
+        $category = ProductCategory::findOrFail($id);
 
         $category->update($validated);
 

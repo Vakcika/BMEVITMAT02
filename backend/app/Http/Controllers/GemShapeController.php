@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\GemShape;
 use App\Http\Resources\GemShapeResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\GemColorRequest;
+
 
 class GemShapeController extends Controller
 {
@@ -35,11 +37,9 @@ class GemShapeController extends Controller
     /**
      * Store a newly created gem shape in storage.
      */
-    public function store(Request $request)
+    public function store(GemColorRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:gem_shapes,name',
-        ]);
+        $validated = $request->validated();
 
         return GemShape::create($validated);
     }
@@ -55,13 +55,11 @@ class GemShapeController extends Controller
     /**
      * Update the specified gem shape in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GemColorRequest $request, string $id)
     {
-        $shape = GemShape::findOrFail($id);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:gem_shapes,name,' . $id,
-        ]);
+        $shape = GemShape::findOrFail($id);
 
         $shape->update($validated);
 
