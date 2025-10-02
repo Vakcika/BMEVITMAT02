@@ -12,13 +12,12 @@ return new class extends Migration {
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->foreignId('material_id')->constrained()->onDelete('cascade');
-            $table->integer('amount');
-            $table->integer('amount_successful')->nullable();
+            $table->integer('amount')->default(0);
+            $table->integer('amount_successful')->default(0);
             $table->boolean('wrought')->default(false);
             $table->boolean('reserved')->default(false);
             $table->boolean('marked')->default(false);
-            $table->string('comment')->nullable();
-            $table->date('date')->nullable();
+            $table->string('comment')->default('');
             $table->timestamps();
         });
     }

@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->foreignId('shipping_price_id')->constrained()->onDelete('cascade');
-            $table->date('date');
             $table->timestamps();
         });
     }

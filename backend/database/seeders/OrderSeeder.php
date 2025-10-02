@@ -22,7 +22,6 @@ class OrderSeeder extends Seeder
                 'id' => (string) Str::uuid(),
                 'customer_id' => $faker->randomElement($customers),
                 'shipping_price_id' => $faker->randomElement($shipping),
-                'date' => $faker->dateTimeBetween('-1 year', 'now'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gem_shapes', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 55)->default('');
+            $table->string('name', 55)->unique()->default('');
             $table->timestamps();
         });
     }

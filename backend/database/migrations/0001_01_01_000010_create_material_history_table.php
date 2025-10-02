@@ -12,11 +12,10 @@ return new class extends Migration {
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->foreignId('material_id')->constrained()->onDelete('cascade');
             $table->foreignId('order_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('name');
-            $table->string('type');
-            $table->double('amount');
-            $table->dateTime('date');
-            $table->text('notes')->nullable();
+            $table->string('name', 255)->default('');
+            $table->string('type', 6)->default('expense');
+            $table->decimal('amount', 15, 2)->default(0);
+            $table->text('notes')->default('');
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('shipping_prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('price')->unique();
+            $table->integer('price')->unique()->default(0);
             $table->timestamps();
         });
     }

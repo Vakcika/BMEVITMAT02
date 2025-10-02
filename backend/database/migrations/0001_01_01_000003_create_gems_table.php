@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('gems', function (Blueprint $table) {
             $table->id();
-            $table->string('size');
+            $table->string('size', 50)->default('');
             $table->foreignId('color_id')->constrained('gem_colors')->onDelete('cascade');
             $table->foreignId('shape_id')->constrained('gem_shapes')->onDelete('cascade');
-            $table->integer('price');
-            $table->integer('booking_price')->nullable();
+            $table->integer('price')->default(0);
+            $table->integer('booking_price')->default(0);
             $table->timestamps();
         });
     }

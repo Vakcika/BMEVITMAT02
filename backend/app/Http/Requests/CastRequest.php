@@ -23,7 +23,6 @@ class CastRequest extends FormRequest
             'reserved' => 'boolean',
             'marked' => 'boolean',
             'comment' => 'nullable|string|max:255',
-            'date' => 'nullable|date',
         ];
     }
 }

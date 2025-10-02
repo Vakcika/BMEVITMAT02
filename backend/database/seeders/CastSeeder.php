@@ -31,7 +31,6 @@ class CastSeeder extends Seeder
                 'reserved' => $faker->boolean,
                 'marked' => $faker->boolean,
                 'comment' => $faker->sentence,
-                'date' => $faker->date(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

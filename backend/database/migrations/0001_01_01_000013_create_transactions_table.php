@@ -15,11 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('type');
-            $table->double('amount', 15, 2);
-            $table->dateTime('date');
-            $table->text('note')->nullable();
+            $table->string('name', 255);
+            $table->string('type', 6)->default('expense');
+            $table->decimal('amount', 15, 2)->default(0);
+            $table->text('note')->default('');
             $table->timestamps();
         });
     }

@@ -11,16 +11,16 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['14K', '18K', 'SILVER', 'BRONZE']);
-            $table->string('name');
-            $table->integer('raw_casting_price');
-            $table->integer('wrought_casting_price');
-            $table->double('raw_casting_loss');
-            $table->double('wrought_casting_loss');
-            $table->integer('mark_price');
-            $table->integer('trade_in_price');
-            $table->integer('stub_placement_price');
-            $table->integer('stub_removal_price');
-            $table->integer('extra_charge')->nullable();
+            $table->string('name', 55);
+            $table->integer('raw_casting_price')->default(0);
+            $table->integer('wrought_casting_price')->default(0);
+            $table->double('raw_casting_loss')->default(0);
+            $table->double('wrought_casting_loss')->default(0);
+            $table->integer('mark_price')->default(0);
+            $table->integer('trade_in_price')->default(0);
+            $table->integer('stub_placement_price')->default(0);
+            $table->integer('stub_removal_price')->default(0);
+            $table->integer('extra_charge')->default(0);
             $table->timestamps();
         });
     }

@@ -28,7 +28,6 @@ class MaterialHistorySeeder extends Seeder
                 'name' => $faker->word,
                 'type' => $faker->randomElement(['in', 'out']),
                 'amount' => $faker->randomFloat(2, 1, 100),
-                'date' => $faker->dateTimeBetween('-1 year', 'now'),
                 'notes' => $faker->sentence,
                 'created_at' => now(),
                 'updated_at' => now(),
