@@ -3,7 +3,6 @@ import useGetGems from "../../hooks/useGetGems";
 import { Button } from "@/components/ui/button";
 import { FormSelect } from "@/components/common/form/FormSelect";
 import { FormInput } from "@/components/common/form/FormInput";
-import { FocusEvent } from "react";
 
 interface Props {
   formik: FormikProps<ProductFormValues>;
@@ -54,9 +53,7 @@ export default function GemSelector({ formik }: Readonly<Props>) {
             onChange={(val) => updateGem(index, "id", Number(val))}
             options={gems}
             getOptionValue={(g) => g.id.toString()}
-            getOptionLabel={(g) =>
-              `${g.color_name} ${g.shape_name} (${g.size})`
-            }
+            getOptionLabel={(g) => `${g.color} ${g.shape} (${g.size})`}
             placeholder={isLoading ? "Loading..." : "Select gem"}
             emptyLabel="None"
           />
@@ -68,7 +65,7 @@ export default function GemSelector({ formik }: Readonly<Props>) {
             value={gem.count}
             onChange={(e) => updateGem(index, "count", Number(e.target.value))}
             id={"gems"}
-            onBlur={function (e: FocusEvent<HTMLInputElement>): void {
+            onBlur={function (): void {
               throw new Error("Function not implemented.");
             }}
           />

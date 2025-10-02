@@ -2,28 +2,61 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Page404 from "./pages/Page404";
 import Login from "./pages/Login";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import LoadingCircle from "./components/common/LoadingCircle";
 import SideBar from "./components/sidebar/SideBar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@webbydevs/react-laravel-sanctum-auth";
 import { Toaster } from "sonner";
 import useIsAuthenticated from "./auth/useIsAuthenticated";
-import ListCustomers from "./components/app/customers/ListCustomers";
-import ViewCustomer from "./components/app/customers/ViewCustomer";
-import EditCustomer from "./components/app/customers/EditCustomer";
-import ListProducts from "./components/app/products/ListProducts";
-import ViewProduct from "./components/app/products/ViewProduct";
-import EditProduct from "./components/app/products/EditProduct";
-import Gems from "./components/app/gems/Gems";
-import ViewGemShape from "./components/app/gems/components/gem-shapes/view/ViewGemShape";
-import ViewGemColor from "./components/app/gems/components/gem-colors/view/ViewGemColor";
-import ViewGem from "./components/app/gems/components/gems/view/ViewGems";
-import ViewShippingPrice from "./components/app/settings/components/shipping/view/ViewShippingPrice";
-import Settings from "./components/app/settings/Settings";
-import ViewMaterial from "./components/app/settings/components/material/view/ViewMaterial";
-import ViewProductCategory from "./components/app/settings/components/product-categories/view/ViewProductCategory";
-import ViewUser from "./components/app/settings/components/users/view/ViewUser";
+
+const Orders = lazy(() => import("./components/app/orders/Orders"));
+const Casts = lazy(() => import("./components/app/casts/Casts"));
+const ListCustomers = lazy(
+  () => import("./components/app/customers/ListCustomers")
+);
+const ViewCustomer = lazy(
+  () => import("./components/app/customers/ViewCustomer")
+);
+const EditCustomer = lazy(
+  () => import("./components/app/customers/EditCustomer")
+);
+const ListProducts = lazy(
+  () => import("./components/app/products/ListProducts")
+);
+const ViewProduct = lazy(() => import("./components/app/products/ViewProduct"));
+const EditProduct = lazy(() => import("./components/app/products/EditProduct"));
+const Gems = lazy(() => import("./components/app/gems/Gems"));
+const ViewGemShape = lazy(
+  () => import("./components/app/gems/components/gem-shapes/view/ViewGemShape")
+);
+const ViewGemColor = lazy(
+  () => import("./components/app/gems/components/gem-colors/view/ViewGemColor")
+);
+const ViewGem = lazy(
+  () => import("./components/app/gems/components/gems/view/ViewGems")
+);
+const ViewShippingPrice = lazy(
+  () =>
+    import(
+      "./components/app/settings/components/shipping/view/ViewShippingPrice"
+    )
+);
+const Settings = lazy(() => import("./components/app/settings/Settings"));
+const ViewMaterial = lazy(
+  () =>
+    import("./components/app/settings/components/material/view/ViewMaterial")
+);
+const ViewProductCategory = lazy(
+  () =>
+    import(
+      "./components/app/settings/components/product-categories/view/ViewProductCategory"
+    )
+);
+const ViewUser = lazy(
+  () => import("./components/app/settings/components/users/view/ViewUser")
+);
+const Statements = lazy(() => import("./components/app/statements/Statements"));
 
 const authConfig = {
   baseUrl: import.meta.env.VITE_API_URL,
@@ -58,6 +91,9 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/app" element={<AppLayout />}>
+                <Route path="orders" element={<Orders />} />
+                <Route path="casts" element={<Casts />} />
+                <Route path="statements" element={<Statements />} />
                 <Route path="customers" element={<ListCustomers />} />
                 <Route
                   path="/app/customer/new"

@@ -31,7 +31,7 @@ export const ProductCard = ({
 
         <div className="absolute top-4 left-4">
           <span className="inline-block bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg">
-            {product.category}
+            {product.category.name}
           </span>
         </div>
 

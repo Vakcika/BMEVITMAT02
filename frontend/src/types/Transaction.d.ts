@@ -8,3 +8,8 @@ interface Transaction {
   created_at: string;
   updated_at: string;
 }
+
+interface TransactionType {
+  id: number;
+  name: string;
+}

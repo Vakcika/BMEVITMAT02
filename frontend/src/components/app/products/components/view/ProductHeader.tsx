@@ -38,7 +38,7 @@ export default function ViewProductHeader({
             <span>•</span>
             <span className="flex items-center gap-1">
               <Layers className="w-4 h-4" />
-              {product.category}
+              {product.category.name}
             </span>
           </div>
         </div>

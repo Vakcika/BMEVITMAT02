@@ -80,7 +80,7 @@ export const ProductCardGrid = ({
         {value?.length === 0 ? (
           <div className="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100/50 rounded-2xl">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-sm mb-4">
-              <Package className="w-10 h-10 text-gray-400" />
+              <Package className="w-10 h-10 text-p300" />
             </div>
             <p className="text-gray-500 text-lg">No products found</p>
           </div>

@@ -50,7 +50,7 @@ export default function ProductDetailsCard({
             label="Category"
             value={
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-p50 text-p500">
-                {product.category}
+                {product.category.name}
               </span>
             }
           />
