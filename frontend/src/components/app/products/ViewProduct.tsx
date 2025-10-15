@@ -9,6 +9,7 @@ import ProductHeader from "./components/view/ProductHeader";
 import ProductDetailsCard from "./components/view/ProductDetailsCard";
 import ProductNotesCard from "./components/view/ProductNotesCard";
 import ProductImageCard from "./components/view/ProductImageCard";
+import { ProductGemsTable } from "./components/view/ProductGemsTable";
 
 export default function ViewProduct() {
   const { id } = useParams();
@@ -63,7 +64,7 @@ export default function ViewProduct() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 my-6">
         {product.name && (
           <div className="lg:col-span-1">
             <ProductImageCard product={product} />
@@ -74,6 +75,7 @@ export default function ViewProduct() {
           <ProductNotesCard product={product} />
         </div>
       </div>
+      <ProductGemsTable gems={product.gems} title="Product gems" />
     </div>
   );
 }

@@ -13,7 +13,7 @@ class ProductGemResource extends JsonResource
             'id'         => $this->id,
             'product_id' => $this->product_id,
             'count'      => $this->count,
-            'gem'        => $this->gem,
+            'gem' => new GemResource($this->gem),
         ];
     }
 }
