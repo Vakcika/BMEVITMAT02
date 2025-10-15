@@ -30,7 +30,7 @@ export default function useGetProduct(isNew: boolean) {
       ? {
           id: query.data.data.id,
           name: query.data.data.name,
-          category_id: 1,
+          category_id: query.data.data.category.name,
           gems: query.data.data.gems.map((g) => ({ id: g.id, count: g.count })),
           weight: query.data.data.weight ?? undefined,
           size: query.data.data.size ?? "",

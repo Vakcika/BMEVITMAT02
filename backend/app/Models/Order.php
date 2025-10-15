@@ -13,8 +13,7 @@ class Order extends Model
     protected $fillable = [
         'id',
         'customer_id',
-        'shipping_price_id',
-        'date',
+        'shipping_price_id'
     ];
 
     protected static function boot()

@@ -18,8 +18,9 @@ export default function ViewCustomerHeader({
       <div>
         <h1 className="text-2xl font-semibold">{customer.company_name}</h1>
         <p className="text-n100">
-          {customer.name} • <BalanceBadge balance={1000} /> •{" "}
-          <MaterialBalanceBadge balance={-15} />
+          {customer.name} •{" "}
+          <BalanceBadge balance={customer.balances.transactions} /> •{" "}
+          <MaterialBalanceBadge balances={customer.balances} />
         </p>
       </div>
       <div className="flex flex-wrap gap-2">

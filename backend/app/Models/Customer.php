@@ -31,4 +31,9 @@ class Customer extends Model
     {
         return $this->hasMany(Material::class);
     }
+
+    public function materialHistory()
+    {
+        return $this->hasMany(MaterialHistory::class);
+    }
 }

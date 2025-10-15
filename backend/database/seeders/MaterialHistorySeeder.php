@@ -20,13 +20,12 @@ class MaterialHistorySeeder extends Seeder
         $orders = Order::pluck('id')->toArray();
 
         foreach (range(1, 20) as $i) {
-            DB::table('material_history')->insert([
+            DB::table('material_histories')->insert([
                 'id' => (string) Str::uuid(),
                 'customer_id' => $faker->randomElement($customers),
                 'material_id' => $faker->randomElement($materials),
                 'order_id' => $faker->randomElement($orders),
                 'name' => $faker->word,
-                'type' => $faker->randomElement(['in', 'out']),
                 'amount' => $faker->randomFloat(2, 1, 100),
                 'notes' => $faker->sentence,
                 'created_at' => now(),

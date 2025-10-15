@@ -20,7 +20,6 @@ class MaterialHistoryRequest extends FormRequest
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'amount' => 'required|numeric|min:0',
-            'date' => 'required|date',
             'notes' => 'nullable|string',
         ];
     }

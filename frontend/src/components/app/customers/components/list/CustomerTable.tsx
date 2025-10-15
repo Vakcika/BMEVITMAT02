@@ -25,7 +25,6 @@ import {
 import { TableSkeleton } from "@/components/tables/TableSkeleton";
 import BalanceBadge from "@/components/common/badges/BalanceBadge";
 import MaterialBalanceBadge from "@/components/common/badges/MaterialBalanceBadge";
-
 interface TableProps {
   value: Customer[];
   loading: boolean;
@@ -97,7 +96,7 @@ export const CustomerTable = ({
               <TableHead>Email</TableHead>
               <TableHead>Phone</TableHead>
               <TableHead>Balance</TableHead>
-              <TableHead>Material</TableHead>
+              <TableHead>Material(14K)</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -116,10 +115,10 @@ export const CustomerTable = ({
                   <PhoneLink customer={customer} />
                 </TableCell>
                 <TableCell>
-                  <BalanceBadge balance={1000} />
+                  <BalanceBadge balance={customer.balances.transactions} />
                 </TableCell>
                 <TableCell>
-                  <MaterialBalanceBadge balance={-10.325} />
+                  <MaterialBalanceBadge balances={customer.balances} />
                 </TableCell>
                 <TableCell>
                   <div className="flex space-x-2">

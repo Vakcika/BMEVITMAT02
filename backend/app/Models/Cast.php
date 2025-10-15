@@ -21,7 +21,6 @@ class Cast extends Model
         'reserved',
         'marked',
         'comment',
-        'date',
     ];
 
     protected static function boot()

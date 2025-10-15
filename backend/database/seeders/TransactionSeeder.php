@@ -24,7 +24,6 @@ class TransactionSeeder extends Seeder
                 'customer_id' => $faker->randomElement($customers),
                 'order_id' => $faker->randomElement($orders),
                 'name' => $faker->word,
-                'type' => $faker->randomElement(['sale', 'refund']),
                 'amount' => $faker->randomFloat(2, 10, 1000),
                 'note' => $faker->sentence,
                 'created_at' => now(),

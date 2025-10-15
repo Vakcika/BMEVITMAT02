@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('material_history', function (Blueprint $table) {
+        Schema::create('material_histories', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->foreignId('material_id')->constrained()->onDelete('cascade');
             $table->foreignId('order_id')->nullable()->constrained()->onDelete('set null');
             $table->string('name', 255)->default('');
-            $table->string('type', 6)->default('expense');
             $table->decimal('amount', 15, 2)->default(0);
             $table->text('notes')->default('');
             $table->timestamps();
@@ -21,6 +20,6 @@ return new class extends Migration {
     }
     public function down(): void
     {
-        Schema::dropIfExists('material_history');
+        Schema::dropIfExists('material_histories');
     }
 };
