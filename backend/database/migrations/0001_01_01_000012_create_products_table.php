@@ -11,11 +11,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 55)->default('');
             $table->foreignId('category_id')->constrained('product_categories')->onDelete('cascade');
-            $table->foreignId('gem_id')->nullable()->constrained('gems')->nullOnDelete();
             $table->integer('gem_count')->default(0);
             $table->decimal('weight', 8, 3)->default(0);
             $table->string('size', 55)->default('');
-            $table->string('image_url',255)->default('');
+            $table->string('image_url', 255)->default('');
             $table->text('notes')->nullable();
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
             'id'         => $this->id,
             'name'         => $this->name,
             'category' => $this->category,
-            'gems' => ProductGemResource::collection($this->whenLoaded('gems')),
+            'gems' => ProductGemResource::collection($this->gems),
             'weight'     => $this->weight,
             'size'       => $this->size,
             'image_url'    => $this->image_url,

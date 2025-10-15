@@ -12,10 +12,8 @@ class ProductGemResource extends JsonResource
         return [
             'id'         => $this->id,
             'product_id' => $this->product_id,
-            'gem_id'     => $this->gem_id,
             'count'      => $this->count,
-            'size'       => $this->size ?? $this->gem->size ?? null,
-            'gem' => $this->whenLoaded('gem'),
+            'gem'        => $this->gem,
         ];
     }
 }

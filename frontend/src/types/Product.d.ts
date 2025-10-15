@@ -7,6 +7,8 @@ interface ProductCategory {
 
 interface ProductGem {
   id: number;
+  product_id: number;
+  gem: Gem;
   count: number;
   created_at?: string;
   updated_at: string;
@@ -16,7 +18,7 @@ interface Product {
   id: number;
   name: string;
   category: ProductCategory;
-  gems: (Gem & { count: number })[];
+  gems: ProductGem[];
   weight?: number;
   size?: string;
   image_url?: string;

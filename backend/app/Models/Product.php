@@ -22,16 +22,9 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class, 'category_id');
     }
 
-    public function mainGem()
-    {
-        return $this->belongsTo(Gem::class, 'gem_id');
-    }
-
     public function gems()
     {
-        return $this->belongsToMany(Gem::class, 'product_gems')
-            ->withPivot('count')
-            ->withTimestamps();
+        return $this->hasMany(ProductGem::class, 'product_id');
     }
 
     public function castings()

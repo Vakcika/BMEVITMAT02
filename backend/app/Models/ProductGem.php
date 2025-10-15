@@ -19,11 +19,11 @@ class ProductGem extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function gem()
     {
-        return $this->belongsTo(Gem::class);
+        return $this->belongsTo(Gem::class, 'gem_id');
     }
 }

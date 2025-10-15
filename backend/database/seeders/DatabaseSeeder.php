@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             GemShapeSeeder::class,
             GemSeeder::class,
             ProductSeeder::class,
+            ProductGemSeeder::class,
             MaterialSeeder::class,
             OrderSeeder::class,
             TransactionSeeder::class,
