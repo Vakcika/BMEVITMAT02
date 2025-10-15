@@ -12,21 +12,11 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $gems = [];
-        foreach ($this->gems as $gem) {
-            $gems[] = [
-                "id" => $gem->id,
-                "color_name" => $gem->color->name,
-                "shape_name" => $gem->shape->name,
-                "count" => $gem->pivot->count,
-                "size" => $gem->size,
-            ];
-        }
         return [
             'id'         => $this->id,
             'name'         => $this->name,
-            'category' => $this->category->name,
-            "gems" => $gems,
+            'category' => $this->category,
+            'gems' => ProductGemResource::collection($this->whenLoaded('gems')),
             'weight'     => $this->weight,
             'size'       => $this->size,
             'image_url'    => $this->image_url,
