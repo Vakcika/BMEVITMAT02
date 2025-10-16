@@ -35,8 +35,9 @@ export default function EditProduct({
     try {
       if (isNew) {
         const { data } = await createProduct(values);
+        console.log(data);
         toast.success("Product created successfully");
-        navigate(data ? `/app/product/${data.id}` : "/app/products");
+        navigate(data ? `/app/product/${data.data.id}` : "/app/products");
       } else {
         await updateProduct(values);
         toast.success("Product updated successfully");

@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->foreignId('category_id')->constrained('product_categories')->onDelete('cascade');
             $table->integer('gem_count')->default(0);
             $table->decimal('weight', 8, 3)->default(0);
-            $table->string('size', 55)->default('');
-            $table->string('image_url', 255)->default('');
+            $table->string('size', 55)->default('')->nullable();
+            $table->string('image_url', 255)->default('')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

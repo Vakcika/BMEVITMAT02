@@ -10,7 +10,7 @@ export default function useGetProduct(isNew: boolean) {
     name: "",
     category_id: 0,
     gems: [],
-    weight: undefined,
+    weight: 0,
     size: "",
     image_url: "",
     notes: "",

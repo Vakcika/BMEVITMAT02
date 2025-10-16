@@ -107,7 +107,7 @@ function App() {
                 <Route path="products" element={<ListProducts />} />
                 <Route
                   path="/app/product/new"
-                  element={<EditCustomer isNew={true} />}
+                  element={<EditProduct isNew={true} />}
                 />
                 <Route path="/app/product/:id" element={<ViewProduct />} />
                 <Route

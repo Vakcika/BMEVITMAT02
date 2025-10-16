@@ -19,7 +19,7 @@ interface Product {
   name: string;
   category: ProductCategory;
   gems: ProductGem[];
-  weight?: number;
+  weight: number;
   size?: string;
   image_url?: string;
   notes?: string;
@@ -28,11 +28,11 @@ interface Product {
 }
 
 interface ProductFormValues {
-  id?: number;
+  id: number;
   name: string;
   category_id: number;
   gems: ProductGemForm[];
-  weight?: number;
+  weight: number;
   size?: string;
   image_url?: string;
   notes?: string;
