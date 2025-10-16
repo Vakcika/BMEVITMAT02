@@ -30,12 +30,17 @@ interface Product {
 interface ProductFormValues {
   id?: number;
   name: string;
-  category_id: number | "";
-  gems: ProductGem[];
+  category_id: number;
+  gems: ProductGemForm[];
   weight?: number;
   size?: string;
   image_url?: string;
   notes?: string;
+}
+
+interface ProductGemForm {
+  id: number;
+  count: number;
 }
 
 interface ShippingPrice {

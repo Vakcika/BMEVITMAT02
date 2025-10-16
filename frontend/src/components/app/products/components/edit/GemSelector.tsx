@@ -53,7 +53,9 @@ export default function GemSelector({ formik }: Readonly<Props>) {
             onChange={(val) => updateGem(index, "id", Number(val))}
             options={gems}
             getOptionValue={(g) => g.id.toString()}
-            getOptionLabel={(g) => `${g.color} ${g.shape} (${g.size})`}
+            getOptionLabel={(g) =>
+              `${g.size} ${g.color.name} ${g.shape.name} | ${g.price} Ft | ${g.booking_price} Ft`
+            }
             placeholder={isLoading ? "Loading..." : "Select gem"}
             emptyLabel="None"
           />

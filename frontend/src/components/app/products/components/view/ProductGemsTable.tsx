@@ -13,8 +13,6 @@ interface TableProps {
   title: string;
 }
 export const ProductGemsTable = ({ gems, title }: TableProps) => {
-  console.log(gems);
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("hu-HU", {
       style: "currency",

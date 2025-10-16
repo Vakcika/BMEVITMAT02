@@ -48,8 +48,30 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
 
-        return Product::create($validated);
+        $product = Product::create([
+            'name' => $validated['name'],
+            'category_id' => $validated['category_id'],
+            'weight' => $validated['weight'] ?? null,
+            'size' => $validated['size'] ?? null,
+            'image_url' => $validated['image_url'] ?? null,
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        // Create related ProductGem rows
+        if (!empty($validated['gems'])) {
+            foreach ($validated['gems'] as $gem) {
+                $product->gems()->create([
+                    'gem_id' => $gem['id'],
+                    'count' => $gem['count'],
+                ]);
+            }
+        }
+
+        return new ProductResource(
+            $product->load('gems.gem.color', 'gems.gem.shape', 'category')
+        );
     }
+
 
     /**
      * Display the specified product.
@@ -68,9 +90,31 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        $product->update($validated);
+        $product->update([
+            'name' => $validated['name'],
+            'category_id' => $validated['category_id'],
+            'weight' => $validated['weight'] ?? null,
+            'size' => $validated['size'] ?? null,
+            'image_url' => $validated['image_url'] ?? null,
+            'notes' => $validated['notes'] ?? null,
+        ]);
 
-        return $product;
+        // Delete old ProductGem entries
+        $product->gems()->delete();
+
+        // Recreate new ones
+        if (!empty($validated['gems'])) {
+            foreach ($validated['gems'] as $gem) {
+                $product->gems()->create([
+                    'gem_id' => $gem['id'],
+                    'count' => $gem['count'],
+                ]);
+            }
+        }
+
+        return new ProductResource(
+            $product->load('gems.gem.color', 'gems.gem.shape', 'category')
+        );
     }
 
     /**

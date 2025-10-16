@@ -8,7 +8,7 @@ export default function useGetProduct(isNew: boolean) {
   const initialValues: ProductFormValues = {
     id: 0,
     name: "",
-    category_id: "",
+    category_id: 0,
     gems: [],
     weight: undefined,
     size: "",
@@ -25,19 +25,25 @@ export default function useGetProduct(isNew: boolean) {
     console.error(query.error);
   }
 
-  const productData: ProductFormValues =
-    !isNew && query.data?.data
-      ? {
-          id: query.data.data.id,
-          name: query.data.data.name,
-          category_id: query.data.data.category.name,
-          gems: query.data.data.gems.map((g) => ({ id: g.id, count: g.count })),
-          weight: query.data.data.weight ?? undefined,
-          size: query.data.data.size ?? "",
-          image_url: query.data.data.image_url ?? "",
-          notes: query.data.data.notes ?? "",
-        }
-      : initialValues;
+  let productData: ProductFormValues = initialValues;
+
+  if (!isNew && query.data?.data) {
+    const product = query.data.data as Product;
+
+    productData = {
+      id: product.id,
+      name: product.name,
+      category_id: product.category?.id ?? 0,
+      gems: product.gems.map((g) => ({
+        id: g.gem.id,
+        count: g.count,
+      })),
+      weight: product.weight ?? undefined,
+      size: product.size ?? "",
+      image_url: product.image_url ?? "",
+      notes: product.notes ?? "",
+    };
+  }
 
   return {
     id,

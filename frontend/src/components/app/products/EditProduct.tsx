@@ -63,7 +63,9 @@ export default function EditProduct({
   const breadcrumbs = [
     { label: "Products", url: "/app/products" },
     {
-      label: isNew ? "New Product" : productData.name,
+      label: isNew
+        ? "New Product"
+        : "#" + productData.id?.toString() + " " + productData.name,
       url: isNew ? "" : `/app/product/${id}`,
     },
   ];
@@ -77,7 +79,9 @@ export default function EditProduct({
       <CustomBreadCrumb model={breadcrumbs} />
       <div className="mt-6 mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">
-          {isNew ? "Create Product" : `Edit: ${productData.name}`}
+          {isNew
+            ? "Create Product"
+            : `Edit: #${productData.id} ${productData.name}`}
         </h1>
       </div>
 
