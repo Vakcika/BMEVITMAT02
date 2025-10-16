@@ -1,6 +1,6 @@
 interface Material {
-  id: number;
-  customer_id?: string | number;
+  id: number | null;
+  customer_id?: number | null;
   type: string;
   name: string;
   raw_casting_price: number;

@@ -6,8 +6,8 @@ export default function useGetMaterial(isNew: boolean) {
   const { id } = useParams();
 
   const initialValues: Material = {
-    id: 0,
-    customer_id: 0,
+    id: null,
+    customer_id: null,
     type: "",
     name: "",
     raw_casting_price: 0,

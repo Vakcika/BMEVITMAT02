@@ -12,8 +12,8 @@ class MaterialResource extends JsonResource
         return [
             'id' => $this->id,
             'customer_id' => $this->customer_id,
-            'type' => $this->material_type,
-            'name' => $this->material_name,
+            'type' => $this->type,
+            'name' => $this->name,
             'raw_casting_price' => $this->raw_casting_price,
             'wrought_casting_price' => $this->wrought_casting_price,
             'raw_casting_loss' => $this->raw_casting_loss,

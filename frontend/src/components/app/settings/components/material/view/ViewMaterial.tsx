@@ -10,6 +10,7 @@ import { MaterialSchema } from "@/components/app/validationSchemas";
 import useGetMaterial from "../hooks/useGetMaterial";
 import useUpdateMaterial from "../hooks/useUpdateMaterial";
 import useCreateMaterial from "../hooks/useCreateMaterial";
+import { FormSelect } from "@/components/common/form/FormSelect";
 
 interface EditMaterialProps {
   isNew?: boolean;
@@ -80,16 +81,21 @@ export default function ViewMaterial({
           >
             {(formik) => (
               <Form className="space-y-6">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <FormInput
-                    id="type"
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-6">
+                  <FormSelect<string>
                     name="type"
                     label="Material Type*"
-                    placeholder="Enter material type"
                     value={formik.values.type}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.type && formik.errors.type}
+                    onChange={(val) => formik.setFieldValue("type", val)}
+                    options={["9K", "14K", "18K", "999", "SILVER", "BRONZE"]}
+                    getOptionValue={(option) => option}
+                    getOptionLabel={(option) => option}
+                    placeholder="Select material type"
+                    error={
+                      formik.touched.type && formik.errors.type
+                        ? formik.errors.type
+                        : undefined
+                    }
                   />
                   <FormInput
                     id="name"

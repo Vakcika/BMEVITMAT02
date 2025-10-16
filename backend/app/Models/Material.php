@@ -8,8 +8,8 @@ class Material extends Model
 {
     protected $fillable = [
         'customer_id',
-        'material_type',
-        'material_name',
+        'type',
+        'name',
         'raw_casting_price',
         'wrought_casting_price',
         'raw_casting_loss',

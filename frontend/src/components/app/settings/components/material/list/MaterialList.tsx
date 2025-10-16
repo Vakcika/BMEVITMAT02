@@ -32,7 +32,7 @@ export default function MaterialList({
   };
 
   const handleDelete = async (data: Material) => {
-    await deleteMaterial(data.id);
+    await deleteMaterial(data.id || 0);
     await refetch();
   };
 

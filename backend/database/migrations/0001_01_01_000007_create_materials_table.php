@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->nullable()->constrained()->onDelete('cascade');
             $table->enum('type', ['9K', '14K', '18K', '999', 'SILVER', 'BRONZE']);
             $table->string('name', 55);
             $table->integer('raw_casting_price')->default(0);

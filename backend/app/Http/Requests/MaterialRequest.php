@@ -14,9 +14,10 @@ class MaterialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => 'required|exists:customers,id',
-            'type' => 'required|string',
-            'name' => 'required|string|max:255',
+            'id' => 'nullable|sometimes|exists:customers,id',
+            'customer_id' => 'nullable|sometimes|exists:customers,id',
+            'type' => 'required|in:9K,14K,18K,999,SILVER,BRONZE',
+            'name' => 'required|string|max:55',
             'raw_casting_price' => 'required|numeric|min:0',
             'wrought_casting_price' => 'required|numeric|min:0',
             'raw_casting_loss' => 'required|numeric|min:0',
@@ -25,7 +26,7 @@ class MaterialRequest extends FormRequest
             'trade_in_price' => 'required|numeric|min:0',
             'stub_placement_price' => 'required|numeric|min:0',
             'stub_removal_price' => 'required|numeric|min:0',
-            'extra_charge' => 'nullable|numeric|min:0',
+            'extra_charge' => 'required|numeric|min:0',
         ];
     }
 }

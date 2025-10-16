@@ -77,11 +77,13 @@ export const UserSchema = Yup.object().shape({
 });
 
 export const MaterialSchema = Yup.object().shape({
-  customer_id: Yup.mixed().required("Customer is required"),
+  customer_id: Yup.number().nullable(),
   type: Yup.string()
     .required("Material type is required")
-    .trim()
-    .min(1, "Material type cannot be empty"),
+    .oneOf(
+      ["9K", "14K", "18K", "999", "SILVER", "BRONZE"],
+      "Invalid material type"
+    ),
   name: Yup.string()
     .required("Material name is required")
     .trim()
@@ -113,5 +115,5 @@ export const MaterialSchema = Yup.object().shape({
     .min(0, "Stub removal price cannot be negative"),
   extra_charge: Yup.number()
     .min(0, "Extra charge cannot be negative")
-    .optional(),
+    .required("Extra charge price is required"),
 });
