@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@webbydevs/react-laravel-sanctum-auth";
 import { Toaster } from "sonner";
 import useIsAuthenticated from "./auth/useIsAuthenticated";
+import EditTransaction from "./components/app/customers/components/edit/transaction/EditTransaction";
 
 const Orders = lazy(() => import("./components/app/orders/Orders"));
 const Casts = lazy(() => import("./components/app/casts/Casts"));
@@ -103,6 +104,14 @@ function App() {
                 <Route
                   path="/app/customer/:id/edit"
                   element={<EditCustomer />}
+                />
+                <Route
+                  path="/app/transaction/new"
+                  element={<EditTransaction isNew={true} />}
+                />
+                <Route
+                  path="/app/transaction/:id"
+                  element={<EditTransaction />}
                 />
                 <Route path="products" element={<ListProducts />} />
                 <Route

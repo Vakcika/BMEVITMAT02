@@ -7,13 +7,13 @@ import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
 import LoadingCircle from "@/components/common/LoadingCircle";
 import { CustomerSchema } from "../validationSchemas";
 import FormActions from "../../common/form/FormAction";
-import Description from "./components/edit/Description";
-import Address from "./components/edit/Address";
-import CompanyInformation from "./components/edit/CompanyInformation";
-import ContactInformation from "./components/edit/ContactInfromation";
-import useGetCustomer from "./hooks/useGetCustomer";
-import useCreateCustomer from "./hooks/useCreateCustomer";
-import useUpdateCustomer from "./hooks/useUpdateCustomer";
+import Description from "./components/edit/customer/Description";
+import Address from "./components/edit/customer/Address";
+import CompanyInformation from "./components/edit/customer/CompanyInformation";
+import ContactInformation from "./components/edit/customer/ContactInfromation";
+import useGetCustomer from "./hooks/customer/useGetCustomer";
+import useCreateCustomer from "./hooks/customer/useCreateCustomer";
+import useUpdateCustomer from "./hooks/customer/useUpdateCustomer";
 
 interface EditCustomerProps {
   isNew?: boolean;

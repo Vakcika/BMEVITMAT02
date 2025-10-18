@@ -1,48 +1,43 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { CustomerTable } from "./CustomerTable";
-import useGetCustomersPaginated from "../../hooks/useGetCustomerPaginated";
-import useDeleteCustomer from "../../hooks/useDeleteCustomer";
+import { Transaction } from "@/types/Transaction";
+import { TransactionTable } from "./TransactionTable";
+import useDeleteTransaction from "../../../hooks/transaction/useDeleteTransaction";
+import useGetTransactionsPaginated from "../../../hooks/transaction/useGetTransactionPaginated";
 
-export default function CustomerListWrapper({
-  title = "Customers",
+export default function TransactionListWrapper({
+  title = "Transactions",
+  baseUrl = "/api/transactions",
   defaultRows = 25,
-  baseUrl = "/api/customers",
   queryParams = "",
+  createQueryParams = "",
 }: Readonly<WrapperProps>) {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [rows, setRows] = useState(defaultRows);
-
   const [searchParams] = useSearchParams();
   const queryString = searchParams.toString();
-  const { customers, meta, isLoading, isFetching, refetch } =
-    useGetCustomersPaginated(rows, page, queryParams, queryString, baseUrl);
 
-  const { deleteCustomer } = useDeleteCustomer(baseUrl, { refetch });
+  const { data, meta, isLoading, isFetching, refetch } =
+    useGetTransactionsPaginated(rows, page, queryParams, queryString, baseUrl);
 
-  const handleView = (customer: Customer) => {
-    navigate(`/app/customer/${customer.id}`);
+  const deleteMutation = useDeleteTransaction(baseUrl);
+
+  const handleView = (transaction: Transaction) => {
+    navigate(`/app/transaction/${transaction.id}`);
   };
 
   const handleCreate = () => {
-    navigate("/app/customer/new");
+    navigate(`/app/transaction/new?${createQueryParams}`);
   };
 
-  const handleDelete = async (customer: Customer) => {
+  const handleDelete = async (transaction: Transaction) => {
     try {
-      await deleteCustomer(customer.id);
-      toast.success("Customer deleted successfully");
+      await deleteMutation.deleteTransaction(transaction.id);
       await refetch();
-    } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message ??
-          error?.message ??
-          "Failed to delete customer"
-      );
+    } catch (error) {
       console.error(error);
     }
   };
@@ -53,12 +48,12 @@ export default function CustomerListWrapper({
         <h1 className="text-2xl font-semibold">{title}</h1>
         <Button className="bg-p300 text-n0" onClick={handleCreate}>
           <Plus className="w-4 h-4 mr-2" />
-          Add new customer
+          Add new
         </Button>
       </div>
-      <div className="bg-white rounded-lg shadow">
-        <CustomerTable
-          value={customers}
+      <div>
+        <TransactionTable
+          value={data}
           loading={isLoading || isFetching}
           title={title}
           onView={handleView}

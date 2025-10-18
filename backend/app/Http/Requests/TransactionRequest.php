@@ -15,11 +15,8 @@ class TransactionRequest extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id',
-            'order_id' => 'required|exists:orders,id',
-            'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'amount' => 'required|numeric|min:0',
-            'date' => 'required|date',
+            'order_id' => 'sometimes|exists:orders,id',
+            'amount' => 'required|numeric',
             'note' => 'nullable|string',
         ];
     }

@@ -13,6 +13,12 @@ export const CustomerSchema = Yup.object().shape({
   description: Yup.string().nullable(),
 });
 
+export const TransactionSchema = Yup.object().shape({
+  customer_id: Yup.number().min(1, "Customer is required").required(),
+  amount: Yup.number().required("Amount is required"),
+  note: Yup.string().nullable(),
+});
+
 export const ProductSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   category_id: Yup.number()

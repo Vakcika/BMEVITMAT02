@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->string('name', 255);
+            $table->foreignId('order_id')->nullable()->constrained()->onDelete('cascade');
             $table->decimal('amount', 15, 2)->default(0);
-            $table->text('note')->default('');
+            $table->text('note')->nullable()->default('');
             $table->timestamps();
         });
     }

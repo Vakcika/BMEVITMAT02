@@ -20,6 +20,8 @@ class TransactionResource extends JsonResource
             'id' => $this->id,
             'amount' => $this->amount,
             'note' => $this->note,
+            'customer' => new CustomerResource($this->customer),
+            'balance' => $this->balance ?? null,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -1,5 +1,5 @@
 import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
-import CustomerList from "./components/list/CustomerList";
+import CustomerList from "./components/list/customer/CustomerList";
 
 export default function ListCustomers() {
   const breadcrumbs = [{ label: "Customers", url: "/app/customers" }];
