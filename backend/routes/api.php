@@ -107,6 +107,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/material-history/{id}', [MaterialHistoryController::class, 'show']);
     Route::put('/material-history/{id}', [MaterialHistoryController::class, 'update']);
     Route::delete('/material-history/{id}', [MaterialHistoryController::class, 'destroy']);
+    Route::get('/material-history-years', [MaterialHistoryController::class, 'getMaterialHistoryYears']);
 
     // ShippingPrices
     Route::get('/shipping-prices', [ShippingPriceController::class, 'index']);

@@ -10,6 +10,7 @@ import { AuthProvider } from "@webbydevs/react-laravel-sanctum-auth";
 import { Toaster } from "sonner";
 import useIsAuthenticated from "./auth/useIsAuthenticated";
 import EditTransaction from "./components/app/customers/components/edit/transaction/EditTransaction";
+import EditMaterialHistory from "./components/app/customers/components/edit/material-history/EditMaterialHistory";
 
 const Orders = lazy(() => import("./components/app/orders/Orders"));
 const Casts = lazy(() => import("./components/app/casts/Casts"));
@@ -112,6 +113,14 @@ function App() {
                 <Route
                   path="/app/transaction/:id"
                   element={<EditTransaction />}
+                />
+                <Route
+                  path="/app/material-history/new"
+                  element={<EditMaterialHistory isNew={true} />}
+                />
+                <Route
+                  path="/app/material-history/:id"
+                  element={<EditMaterialHistory />}
                 />
                 <Route path="products" element={<ListProducts />} />
                 <Route

@@ -8,7 +8,7 @@ interface Customer {
   tax_number: string;
   website: string;
   description: string;
-  balances?: CustomerBalances;
+  balances: CustomerBalances;
   created_at: string;
   updated_at?: string;
 }

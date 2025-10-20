@@ -9,6 +9,7 @@ import ViewCustomerHeader from "./components/view/ViewCustomerHeader";
 import CustomerDetailsCard from "./components/view/CustomerDatilsCard";
 import CustomerExtraInfoCard from "./components/view/CustomerExtraInfoCard";
 import TransactionList from "./components/list/transaction/TransactionList";
+import MaterialHistoryList from "./components/list/material-history/MaterialHistoryList";
 
 export default function ViewCustomer() {
   const { id } = useParams();
@@ -73,7 +74,7 @@ export default function ViewCustomer() {
           queryParams={"&customer=" + customer.id}
           createQueryParams={"&customer=" + customer.id}
         />
-        <TransactionList
+        <MaterialHistoryList
           defaultRows={5}
           queryParams={"&customer=" + customer.id}
           createQueryParams={"&customer=" + customer.id}

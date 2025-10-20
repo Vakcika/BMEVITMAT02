@@ -17,8 +17,3 @@ interface TransactionFormValues {
   amount: number;
   note: string | null;
 }
-
-interface TransactionType {
-  id: number;
-  name: string;
-}

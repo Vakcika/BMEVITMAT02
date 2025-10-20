@@ -14,12 +14,11 @@ class MaterialHistoryResource extends JsonResource
     {
         return [
             'id'          => $this->id,
-            'customer_id' => $this->customer_id,
-            'material_id' => $this->material_id,
-            'order_id'    => $this->order_id,
-            'name'        => $this->name,
-            'type'        => $this->type,
+            'customer' => new CustomerResource($this->customer),
+            'material' => new MaterialResource($this->material),
+            'order'    => new OrderResource($this->order),
             'amount'      => $this->amount,
+            'balances' => $this->balances ?? [],
             'notes'       => $this->notes,
             'created_at'  => $this->created_at,
             'updated_at'  => $this->updated_at,

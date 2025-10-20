@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import useHttpGet from "@/api/useHttpGet";
+import { Material } from "@/types/Material";
 
 export default function useGetMaterial(isNew: boolean) {
   const { id } = useParams();
 
   const initialValues: Material = {
-    id: null,
+    id: 0,
     customer_id: null,
     type: "",
     name: "",

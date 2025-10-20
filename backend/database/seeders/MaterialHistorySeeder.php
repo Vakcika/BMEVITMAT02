@@ -25,7 +25,6 @@ class MaterialHistorySeeder extends Seeder
                 'customer_id' => $faker->randomElement($customers),
                 'material_id' => $faker->randomElement($materials),
                 'order_id' => $faker->randomElement($orders),
-                'name' => $faker->word,
                 'amount' => $faker->randomFloat(2, 1, 100),
                 'notes' => $faker->sentence,
                 'created_at' => now(),

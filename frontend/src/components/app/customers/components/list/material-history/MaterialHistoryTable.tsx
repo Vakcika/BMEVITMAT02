@@ -21,15 +21,16 @@ import {
   PaginationControls,
 } from "../../../../../tables/PaginationControls";
 import { TableSkeleton } from "../../../../../tables/TableSkeleton";
-import { Transaction } from "@/types/Transaction";
-import TransactionFilters from "./TransactionFilters";
+import { MaterialHistory } from "@/types/Material";
+import MaterialHistoryFilters from "./MaterialHistoryFilters";
+import MaterialHistoryBalanceBadge from "@/components/common/badges/MaterialHistoryBalanceBadge";
 
 interface TableProps {
-  value: Transaction[];
+  value: MaterialHistory[];
   loading: boolean;
   title: string;
-  onView: (data: Transaction) => void;
-  onDelete?: (data: Transaction) => void;
+  onView: (data: MaterialHistory) => void;
+  onDelete?: (data: MaterialHistory) => void;
   paginationProps?: CustomPaginationProps;
 }
 
@@ -46,7 +47,7 @@ const getValueColor = (value: number) => {
   return "";
 };
 
-export const TransactionTable = ({
+export const MaterialHistoryTable = ({
   value,
   loading,
   title,
@@ -69,7 +70,7 @@ export const TransactionTable = ({
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{title}</CardTitle>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 justify-items-end gap-4">
-          <TransactionFilters />
+          <MaterialHistoryFilters />
           {paginationProps && (
             <Select
               value={paginationProps.rows.toString()}
@@ -99,6 +100,7 @@ export const TransactionTable = ({
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>Note</TableHead>
+                <TableHead>Type</TableHead>
                 <TableHead>Amount</TableHead>
                 <TableHead>Balance</TableHead>
                 <TableHead>Date</TableHead>
@@ -109,17 +111,17 @@ export const TransactionTable = ({
               {value?.map((data) => (
                 <TableRow key={data.id}>
                   <TableCell>{data.id.substring(0, 8)}</TableCell>
-                  <TableCell>{data.note}</TableCell>
+                  <TableCell>{data.notes}</TableCell>
+                  <TableCell>{data.material.type}</TableCell>
                   <TableCell
                     className={`text-center ${getValueColor(data.amount)}`}
                   >
-                    {data.amount} Ft
+                    {data.amount} g
                   </TableCell>
-                  <TableCell
-                    className={`text-center ${getValueColor(data.balance)}`}
-                  >
-                    {data.balance} Ft
+                  <TableCell className="text-center space-y-1">
+                    <MaterialHistoryBalanceBadge balances={data.balances} />
                   </TableCell>
+
                   <TableCell>
                     {new Date(data.created_at).toLocaleDateString()}
                   </TableCell>
@@ -130,9 +132,9 @@ export const TransactionTable = ({
                         <DeleteActionButton
                           item={data}
                           itemName="data"
-                          itemLabel={`Transaction #${data.id.substring(0, 8)} ${
-                            data.note
-                          } (${data.amount} Ft)`}
+                          itemLabel={`Material #${data.id.substring(0, 8)} ${
+                            data.notes
+                          } (${data.amount} g)`}
                           onDelete={onDelete}
                         />
                       )}

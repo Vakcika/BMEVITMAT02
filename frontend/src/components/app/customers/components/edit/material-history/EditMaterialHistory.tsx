@@ -3,58 +3,63 @@ import { Formik, Form, FormikHelpers } from "formik";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import CustomBreadCrumb from "@/components/common/CustomBreadcrumb";
 import LoadingCircle from "@/components/common/LoadingCircle";
-import { Transaction, TransactionFormValues } from "@/types/Transaction";
 import FormActions from "@/components/common/form/FormAction.tsx";
-import { TransactionSchema } from "@/components/app/validationSchemas";
 import useGetCustomers from "../../../hooks/customer/useGetCustomers";
-import useCreateTransaction from "../../../hooks/transaction/useCreateTransaction";
-import useGetTransaction from "../../../hooks/transaction/useGetTransaction";
-import useUpdateTransaction from "../../../hooks/transaction/useUpdateTransaction";
-import TransactionFormSection from "./TransactionFormSection";
+import MaterialHistoryFormSection from "./MaterialHistoryFormSection";
+import { MaterialHistory, MaterialHistoryFormValues } from "@/types/Material";
+import useCreateMaterialHistory from "../../../hooks/material-history/useCreateMaterialHistory";
+import useGetMaterialHistory from "../../../hooks/material-history/useGetMaterialHistory";
+import useUpdateMaterialHistory from "../../../hooks/material-history/useUpdateMaterialHistory";
+import { UUID } from "crypto";
+import { MaterialHistorySchema } from "@/components/app/validationSchemas";
+import useGetMaterials from "@/components/app/settings/components/material/hooks/useGetMaterials";
 
-interface EditTransactionProps {
+interface EditMaterialHistoryProps {
   isNew?: boolean;
 }
 
-export function mapTransactionToFormValues(
-  tx: Transaction
-): TransactionFormValues {
+export function mapMaterialHistoryToFormValues(
+  tx: MaterialHistory
+): MaterialHistoryFormValues {
   return {
     id: tx.id,
     customer_id: tx.customer.id,
     amount: tx.amount,
-    note: tx.note,
+    notes: tx.notes,
+    material_id: tx.material.id,
+    order_id: "" as UUID,
   };
 }
 
-export default function EditTransaction({
+export default function EditMaterialHistory({
   isNew = false,
-}: Readonly<EditTransactionProps>) {
+}: Readonly<EditMaterialHistoryProps>) {
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const customerId = Number(searchParams.get("customer")) || null;
   const navigate = useNavigate();
 
   const { customers } = useGetCustomers();
-  const { transactionData, isLoading: transactionLoading } =
-    useGetTransaction(isNew);
-  const { createTransaction } = useCreateTransaction();
-  const { updateTransaction } = useUpdateTransaction();
+  const { materials } = useGetMaterials();
+  const { materialHistoryData, isLoading: materialHistoryLoading } =
+    useGetMaterialHistory(isNew);
+  const { createMaterialHistory } = useCreateMaterialHistory();
+  const { updateMaterialHistory } = useUpdateMaterialHistory();
 
   const handleSubmit = async (
-    values: TransactionFormValues,
-    { setSubmitting }: FormikHelpers<TransactionFormValues>
+    values: MaterialHistoryFormValues,
+    { setSubmitting }: FormikHelpers<MaterialHistoryFormValues>
   ) => {
     try {
       if (isNew) {
-        const result = await createTransaction(values);
+        const result = await createMaterialHistory(values);
         if (result?.data?.id) {
           navigate(`/app/customer/${result.data.customer_id}`);
         } else {
           navigate("/app/customer");
         }
       } else {
-        await updateTransaction(values);
+        await updateMaterialHistory(values);
         navigate(`/app/customer/${values.customer_id}`);
       }
     } finally {
@@ -65,51 +70,53 @@ export default function EditTransaction({
   const handleCancel = () => {
     if (isNew) navigate("/app/customer");
     else if (customerId) navigate(`/app/customer/${customerId}`);
-    else navigate(`/app/customer/${transactionData.customer.id}`);
+    else navigate(`/app/customer/${materialHistoryData.customer.id}`);
   };
 
   // Prepare breadcrumbs
   const breadcrumbs = [
     { label: "Customers", url: "/app/customers" },
-    transactionData
+    materialHistoryData
       ? {
-          label: "Transactions",
-          url: `/app/customer/${transactionData.customer.id}`,
+          label: "Material history",
+          url: `/app/customer/${materialHistoryData.customer.id}`,
         }
-      : { label: "Transactions", url: "/app/customers" },
+      : { label: "Material history", url: "/app/customers" },
     {
-      label: isNew ? "New Transaction" : `#${id?.toString()}`,
+      label: isNew ? "New material history" : `#${id?.toString()}`,
       url: isNew ? "" : `/app/customer/${customerId}`,
     },
   ];
 
-  if (!isNew && transactionLoading) return <LoadingCircle />;
+  if (!isNew && materialHistoryLoading) return <LoadingCircle />;
 
-  const initialValues: TransactionFormValues = isNew
+  const initialValues: MaterialHistoryFormValues = isNew
     ? {
-        customer_id: transactionData.customer.id ?? 0,
+        customer_id: materialHistoryData.customer.id ?? 0,
+        order_id: "" as UUID,
+        material_id: materialHistoryData.material.id ?? 0,
         amount: 0,
-        note: "",
+        notes: "",
       }
-    : mapTransactionToFormValues(transactionData as Transaction);
+    : mapMaterialHistoryToFormValues(materialHistoryData as MaterialHistory);
 
   return (
     <div className="p-4">
       <CustomBreadCrumb model={breadcrumbs} />
       <div className="mt-6 mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">
-          {isNew ? "Create Transaction" : `Edit: #${id?.toString()}`}
+          {isNew ? "Create Material history" : `Edit: #${id?.toString()}`}
         </h1>
       </div>
 
       <Card className="bg-white rounded-lg shadow">
         <CardHeader>
-          <CardTitle>Transaction Information</CardTitle>
+          <CardTitle>Material History Information</CardTitle>
         </CardHeader>
         <CardContent>
-          <Formik<TransactionFormValues>
+          <Formik<MaterialHistoryFormValues>
             initialValues={initialValues}
-            validationSchema={TransactionSchema}
+            validationSchema={MaterialHistorySchema}
             onSubmit={handleSubmit}
             enableReinitialize
           >
@@ -124,7 +131,7 @@ export default function EditTransaction({
             }) => (
               <Form className="space-y-6">
                 <div className="grid grid-cols-1 gap-6">
-                  <TransactionFormSection
+                  <MaterialHistoryFormSection
                     values={values}
                     errors={errors}
                     touched={touched}
@@ -132,6 +139,7 @@ export default function EditTransaction({
                     handleBlur={handleBlur}
                     setFieldValue={setFieldValue}
                     customers={customers}
+                    materials={materials}
                   />
                 </div>
 
@@ -139,9 +147,9 @@ export default function EditTransaction({
                   <FormActions
                     isSubmitting={isSubmitting}
                     onCancel={handleCancel}
-                    submitText={isNew ? "Create transaction" : "Save"}
+                    submitText={isNew ? "Create materialHistory" : "Save"}
                     submittingText={
-                      isNew ? "Creating transaction..." : "Saving..."
+                      isNew ? "Creating materialHistory..." : "Saving..."
                     }
                   />
                 </div>

@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import useHttpPost from "@/api/useHttpPost";
+import { Material } from "@/types/Material";
 
 export default function useCreateMaterial() {
   const createMutation = useHttpPost("/api/materials");

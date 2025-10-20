@@ -4,19 +4,20 @@ import { FormikErrors, FormikTouched } from "formik";
 import { ChangeEvent, FocusEvent } from "react";
 import { FormSelect } from "@/components/common/form/FormSelect";
 import { FormInput } from "@/components/common/form/FormInput";
-import { TransactionFormValues } from "@/types/Transaction";
+import { Material, MaterialHistoryFormValues } from "@/types/Material";
 
-interface TransactionFormSectionProps {
-  values: TransactionFormValues;
-  errors: FormikErrors<TransactionFormValues>;
-  touched: FormikTouched<TransactionFormValues>;
+interface MaterialHistoryFormSectionProps {
+  values: MaterialHistoryFormValues;
+  errors: FormikErrors<MaterialHistoryFormValues>;
+  touched: FormikTouched<MaterialHistoryFormValues>;
   handleChange: (e: ChangeEvent<any>) => void;
   handleBlur: (e: FocusEvent<any>) => void;
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
   customers: Customer[];
+  materials: Material[];
 }
 
-export default function TransactionFormSection({
+export default function MaterialHistoryFormSection({
   values,
   errors,
   touched,
@@ -24,7 +25,8 @@ export default function TransactionFormSection({
   handleBlur,
   setFieldValue,
   customers,
-}: Readonly<TransactionFormSectionProps>) {
+  materials,
+}: Readonly<MaterialHistoryFormSectionProps>) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -59,24 +61,39 @@ export default function TransactionFormSection({
             error={touched.customer_id && (errors.customer_id as string)}
           />
         </div>
+        <div className="space-y-4">
+          {/* Customer Section */}
+          <FormSelect
+            label="Material*"
+            name="material_id"
+            value={values.material_id.toString()}
+            onChange={(value) => setFieldValue("material_id", Number(value))}
+            options={materials}
+            getOptionValue={(m) => m.id.toString()}
+            getOptionLabel={(m) => `${m.name} | ${m.type}`}
+            placeholder="Select material"
+            emptyLabel="None"
+            error={touched.material_id && (errors.material_id as string)}
+          />
+        </div>
 
         {/* Amount Section */}
       </div>
 
       {/* Notes Section */}
       <div className="space-y-2 md:col-span-2">
-        <Label htmlFor="note">Notes</Label>
+        <Label htmlFor="notes">Notes</Label>
         <Textarea
           id="notes"
-          name="note"
-          placeholder="Additional notes about this transaction"
-          value={values.note ?? ""}
+          name="notes"
+          placeholder="Additional notes about this history"
+          value={values.notes ?? ""}
           onChange={handleChange}
           onBlur={handleBlur}
           rows={4}
         />
-        {touched.note && errors.note && (
-          <p className="text-sm text-w300 mt-1">{errors.note}</p>
+        {touched.notes && errors.notes && (
+          <p className="text-sm text-w300 mt-1">{errors.notes}</p>
         )}
       </div>
     </div>

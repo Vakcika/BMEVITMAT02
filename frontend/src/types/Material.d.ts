@@ -1,5 +1,7 @@
+import { UUID } from "crypto";
+
 interface Material {
-  id: number | null;
+  id: number;
   customer_id?: number | null;
   type: string;
   name: string;
@@ -14,4 +16,25 @@ interface Material {
   extra_charge: number;
   created_at?: string;
   updated_at: string;
+}
+
+interface MaterialHistory {
+  id: UUID;
+  customer: Customer;
+  order: Order;
+  material: Material;
+  amount: number;
+  balances: Record<string, number>;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+interface MaterialHistoryFormValues {
+  id?: UUID;
+  customer_id: number;
+  material_id: number;
+  order_id?: UUID;
+  amount: number;
+  notes: string | null;
 }

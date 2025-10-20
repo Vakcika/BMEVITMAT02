@@ -15,7 +15,6 @@ class MaterialHistory extends Model
         'customer_id',
         'material_id',
         'order_id',
-        'name',
         'amount',
         'notes',
     ];

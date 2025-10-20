@@ -19,6 +19,13 @@ export const TransactionSchema = Yup.object().shape({
   note: Yup.string().nullable(),
 });
 
+export const MaterialHistorySchema = Yup.object().shape({
+  customer_id: Yup.number().min(1, "Customer is required").required(),
+  material_id: Yup.number().min(1, "Material is required").required(),
+  amount: Yup.number().required("Amount is required"),
+  notes: Yup.string().nullable(),
+});
+
 export const ProductSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   category_id: Yup.number()
