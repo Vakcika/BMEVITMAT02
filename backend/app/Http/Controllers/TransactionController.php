@@ -47,6 +47,11 @@ class TransactionController extends Controller
 
         $pageCollection = $transactions->getCollection();
 
+        // --- Handle empty result ---
+        if ($pageCollection->isEmpty()) {
+            return Transaction::collection($transactions);
+        }
+
         // Find the oldest transaction on this page (chronologically)
         $oldestOnPage = $pageCollection->min('created_at');
 

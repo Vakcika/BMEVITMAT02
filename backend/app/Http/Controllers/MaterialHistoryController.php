@@ -20,7 +20,8 @@ class MaterialHistoryController extends Controller
             'sort_dir' => 'nullable|in:asc,desc',
             'per_page' => 'nullable|integer|min:1|max:100',
             'page' => 'nullable|integer|min:1',
-            'material_type' => 'nullable|string',
+            'year' => 'nullable|integer|min:2000|max:' . now()->year,
+            'customer' => 'nullable|string|exists:customers,id',
         ]);
 
         $sortBy = $validated['sort_by'] ?? 'created_at';
@@ -30,10 +31,12 @@ class MaterialHistoryController extends Controller
 
         $query = MaterialHistory::with('material');
 
-        if (!empty($validated['material_type'])) {
-            $query->whereHas('material', function ($q) use ($validated) {
-                $q->where('type', $validated['material_type']);
-            });
+        if (!empty($validated['customer'])) {
+            $query->where('customer_id', $validated['customer']);
+        }
+
+        if (!empty($validated['year'])) {
+            $query->whereYear('created_at', $validated['year']);
         }
 
         $histories = (clone $query)
@@ -41,6 +44,12 @@ class MaterialHistoryController extends Controller
             ->paginate($perPage, ['*'], 'page', $page);
 
         $pageCollection = $histories->getCollection();
+
+        // --- Handle empty result ---
+        if ($pageCollection->isEmpty()) {
+            return MaterialHistoryResource::collection($histories);
+        }
+
         $oldestOnPage = $pageCollection->min('created_at');
 
         // --- Gold karat conversion factors (to 999 purity) ---
@@ -52,11 +61,16 @@ class MaterialHistoryController extends Controller
         ];
 
         // --- Base balances before current page ---
-        $previousBalances = (clone $query)
-            ->where('created_at', '<', $oldestOnPage)
-            ->get()
-            ->groupBy(fn($h) => $h->material->type)
-            ->map(fn($group) => round($group->sum('amount'), 2));
+        if (is_null($oldestOnPage)) {
+            $previousBalances = collect();
+        } else {
+            // --- Base balances before current page ---
+            $previousBalances = (clone $query)
+                ->where('created_at', '<', $oldestOnPage)
+                ->get()
+                ->groupBy(fn($h) => $h->material->type)
+                ->map(fn($group) => round($group->sum('amount'), 2));
+        }
 
         $runningBalances = $previousBalances->toArray();
 
