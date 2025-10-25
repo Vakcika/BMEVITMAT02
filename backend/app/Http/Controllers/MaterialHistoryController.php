@@ -16,6 +16,8 @@ class MaterialHistoryController extends Controller
     public function index(Request $request)
     {
         $validated = $request->validate([
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'sort_by' => 'nullable|in:id,material_id,amount,created_at,updated_at',
             'sort_dir' => 'nullable|in:asc,desc',
             'per_page' => 'nullable|integer|min:1|max:100',
@@ -35,8 +37,11 @@ class MaterialHistoryController extends Controller
             $query->where('customer_id', $validated['customer']);
         }
 
-        if (!empty($validated['year'])) {
-            $query->whereYear('created_at', $validated['year']);
+        if (!empty($validated['start_date'])) {
+            $query->whereDate('created_at', '>=', $validated['start_date']);
+        }
+        if (!empty($validated['end_date'])) {
+            $query->whereDate('created_at', '<=', $validated['end_date']);
         }
 
         $histories = (clone $query)
@@ -181,23 +186,5 @@ class MaterialHistoryController extends Controller
         $history->delete();
 
         return response()->json(['message' => 'MaterialHistory deleted successfully.']);
-    }
-
-    /**
-     * Get all years for transactions
-     */
-    public function getMaterialHistoryYears()
-    {
-        $query = MaterialHistory::query()
-            ->selectRaw('DISTINCT strftime(\'%Y\', created_at) as year');
-
-        $years = $query->orderBy('year', 'desc')
-            ->get()
-            ->pluck('year')
-            ->toArray();
-
-        return response()->json([
-            'years' => $years
-        ]);
     }
 }

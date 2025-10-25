@@ -16,7 +16,8 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $validated = $request->validate([
-            'year' => 'nullable|integer|min:2000|max:' . now()->year,
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'customer' => 'nullable|string|exists:customers,id',
             'sort_by' => 'nullable|in:amount,amount_in_base,created_at,updated_at',
             'sort_dir' => 'nullable|in:asc,desc',
@@ -32,8 +33,11 @@ class TransactionController extends Controller
         // Base query with filters
         $query = Transaction::query();
 
-        if (!empty($validated['year'])) {
-            $query->whereYear('created_at', $validated['year']);
+        if (!empty($validated['start_date'])) {
+            $query->whereDate('created_at', '>=', $validated['start_date']);
+        }
+        if (!empty($validated['end_date'])) {
+            $query->whereDate('created_at', '<=', $validated['end_date']);
         }
 
         if (!empty($validated['customer'])) {
@@ -49,7 +53,7 @@ class TransactionController extends Controller
 
         // --- Handle empty result ---
         if ($pageCollection->isEmpty()) {
-            return Transaction::collection($transactions);
+            return TransactionResource::collection($transactions);
         }
 
         // Find the oldest transaction on this page (chronologically)
@@ -117,23 +121,5 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->delete();
         return response()->json(['message' => 'Transaction deleted.']);
-    }
-
-    /**
-     * Get all years for transactions
-     */
-    public function getTransactionYears()
-    {
-        $query = Transaction::query()
-            ->selectRaw('DISTINCT strftime(\'%Y\', created_at) as year');
-
-        $years = $query->orderBy('year', 'desc')
-            ->get()
-            ->pluck('year')
-            ->toArray();
-
-        return response()->json([
-            'years' => $years
-        ]);
     }
 }

@@ -57,7 +57,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/transactions/{id}', [TransactionController::class, 'show']);
     Route::put('/transactions/{id}', [TransactionController::class, 'update']);
     Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
-    Route::get('/transactions-years', [TransactionController::class, 'getTransactionYears']);
 
     // Products
     Route::get('/products', [ProductController::class, 'index']);
@@ -107,7 +106,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/material-history/{id}', [MaterialHistoryController::class, 'show']);
     Route::put('/material-history/{id}', [MaterialHistoryController::class, 'update']);
     Route::delete('/material-history/{id}', [MaterialHistoryController::class, 'destroy']);
-    Route::get('/material-history-years', [MaterialHistoryController::class, 'getMaterialHistoryYears']);
 
     // ShippingPrices
     Route::get('/shipping-prices', [ShippingPriceController::class, 'index']);

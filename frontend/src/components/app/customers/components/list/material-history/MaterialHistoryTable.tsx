@@ -22,8 +22,8 @@ import {
 } from "../../../../../tables/PaginationControls";
 import { TableSkeleton } from "../../../../../tables/TableSkeleton";
 import { MaterialHistory } from "@/types/Material";
-import MaterialHistoryFilters from "./MaterialHistoryFilters";
 import MaterialHistoryBalanceBadge from "@/components/common/badges/MaterialHistoryBalanceBadge";
+import DateFilter from "../DateFilter";
 
 interface TableProps {
   value: MaterialHistory[];
@@ -69,8 +69,8 @@ export const MaterialHistoryTable = ({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{title}</CardTitle>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 justify-items-end gap-4">
-          <MaterialHistoryFilters />
+        <div className="flex flex-col items-end sm:flex-row gap-4 sm:items-center sm:justify-between">
+          <DateFilter />
           {paginationProps && (
             <Select
               value={paginationProps.rows.toString()}
