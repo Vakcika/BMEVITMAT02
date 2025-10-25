@@ -89,7 +89,7 @@ export default function EditTransaction({
     ? {
         customer_id: transactionData.customer.id ?? 0,
         amount: 0,
-        note: "",
+        note: "Befizetés",
       }
     : mapTransactionToFormValues(transactionData as Transaction);
 

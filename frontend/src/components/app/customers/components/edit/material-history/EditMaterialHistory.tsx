@@ -96,7 +96,7 @@ export default function EditMaterialHistory({
         order_id: "" as UUID,
         material_id: materialHistoryData.material.id ?? 0,
         amount: 0,
-        notes: "",
+        notes: "Anyag hozatal",
       }
     : mapMaterialHistoryToFormValues(materialHistoryData as MaterialHistory);
 

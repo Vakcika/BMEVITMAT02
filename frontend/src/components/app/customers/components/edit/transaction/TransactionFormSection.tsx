@@ -27,22 +27,7 @@ export default function TransactionFormSection({
 }: Readonly<TransactionFormSectionProps>) {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Financial Details</h3>
-          <FormInput
-            id="amount"
-            name="amount"
-            label="Amount*"
-            type="number"
-            step="100"
-            placeholder="0"
-            value={values.amount}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.amount && (errors.amount as string)}
-          />
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         <div className="space-y-4">
           {/* Customer Section */}
           <h3 className="text-lg font-medium">Basic Information</h3>
@@ -59,25 +44,39 @@ export default function TransactionFormSection({
             error={touched.customer_id && (errors.customer_id as string)}
           />
         </div>
+        <div className="space-y-4">
+          {/* Amount Section */}
+          <h3 className="text-lg font-medium">Financial Details</h3>
+          <FormInput
+            id="amount"
+            name="amount"
+            label="Amount*"
+            type="number"
+            step="100"
+            placeholder="0"
+            value={values.amount}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.amount && (errors.amount as string)}
+          />
+        </div>
 
-        {/* Amount Section */}
-      </div>
-
-      {/* Notes Section */}
-      <div className="space-y-2 md:col-span-2">
-        <Label htmlFor="note">Notes</Label>
-        <Textarea
-          id="notes"
-          name="note"
-          placeholder="Additional notes about this transaction"
-          value={values.note ?? ""}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          rows={4}
-        />
-        {touched.note && errors.note && (
-          <p className="text-sm text-w300 mt-1">{errors.note}</p>
-        )}
+        {/* Notes Section */}
+        <div className="space-y-2 md:col-span-2">
+          <Label htmlFor="note">Notes</Label>
+          <Textarea
+            id="notes"
+            name="note"
+            placeholder="Additional notes about this transaction"
+            value={values.note ?? ""}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            rows={4}
+          />
+          {touched.note && errors.note && (
+            <p className="text-sm text-w300 mt-1">{errors.note}</p>
+          )}
+        </div>
       </div>
     </div>
   );
